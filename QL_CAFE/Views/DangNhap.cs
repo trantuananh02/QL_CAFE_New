@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QL_CAFE.Views
 {
-    public partial class FormDangNhap : Form
+    public partial class DangNhap : Form
     {
-        public FormDangNhap()
+        public DangNhap()
         {
             InitializeComponent();
         }
