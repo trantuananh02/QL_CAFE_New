@@ -8,6 +8,12 @@ namespace QL_CAFE.Models
 {
     public class TaiKhoan
     {
+        // Họ tên của người dùng
+        public string HoTen { get; set; }
+
+        // Số điện thoại của người dùng
+        public string SoDienThoai { get; set; }
+
         // Tên tài khoản (khóa chính)
         public string TenTK { get; set; }
 
@@ -17,25 +23,23 @@ namespace QL_CAFE.Models
         // Vai trò: Admin hoặc User
         public string VaiTro { get; set; }
 
-        // Salt để bảo mật thêm cho mật khẩu
-        public string Salt { get; set; }
-
         // Constructor mặc định
         public TaiKhoan() { }
-        
+
         // Constructor đầy đủ
-        public TaiKhoan(string tenTK, string matKhau, string vaiTro, string salt)
+        public TaiKhoan(string hoTen, string soDienThoai, string tenTK, string matKhau, string vaiTro)
         {
+            HoTen = hoTen;
+            SoDienThoai = soDienThoai;
             TenTK = tenTK;
             MatKhau = matKhau;
             VaiTro = vaiTro;
-            Salt = salt;
         }
 
         // Phương thức hiển thị thông tin tài khoản (ví dụ minh họa)
         public override string ToString()
         {
-            return $"TenTK: {TenTK}, VaiTro: {VaiTro}";
+            return $"TenTK: {TenTK}, VaiTro: {VaiTro}, HoTen: {HoTen}, SoDienThoai: {SoDienThoai}";
         }
     }
 

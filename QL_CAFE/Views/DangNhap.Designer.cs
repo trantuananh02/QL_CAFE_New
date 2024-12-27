@@ -32,7 +32,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.txtMatKhau = new System.Windows.Forms.TextBox();
-            this.txtDangNhap = new System.Windows.Forms.TextBox();
+            this.txtTenTaiKhoan = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -56,7 +56,7 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.txtMatKhau);
-            this.panel1.Controls.Add(this.txtDangNhap);
+            this.panel1.Controls.Add(this.txtTenTaiKhoan);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -96,18 +96,22 @@
             this.txtMatKhau.Size = new System.Drawing.Size(399, 30);
             this.txtMatKhau.TabIndex = 3;
             this.txtMatKhau.Text = "Nhập mật khẩu";
+            this.txtMatKhau.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtMatKhau_MouseClick);
             this.txtMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged);
+            this.txtMatKhau.Leave += new System.EventHandler(this.txtMatKhau_Leave);
             // 
-            // txtDangNhap
+            // txtTenTaiKhoan
             // 
-            this.txtDangNhap.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDangNhap.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.txtDangNhap.Location = new System.Drawing.Point(209, 178);
-            this.txtDangNhap.Name = "txtDangNhap";
-            this.txtDangNhap.Size = new System.Drawing.Size(426, 30);
-            this.txtDangNhap.TabIndex = 2;
-            this.txtDangNhap.Text = "Nhập tên đăng nhập";
-            this.txtDangNhap.TextChanged += new System.EventHandler(this.txtDangNhap_TextChanged);
+            this.txtTenTaiKhoan.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTenTaiKhoan.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtTenTaiKhoan.Location = new System.Drawing.Point(209, 178);
+            this.txtTenTaiKhoan.Name = "txtTenTaiKhoan";
+            this.txtTenTaiKhoan.Size = new System.Drawing.Size(426, 30);
+            this.txtTenTaiKhoan.TabIndex = 2;
+            this.txtTenTaiKhoan.Text = "Nhập tên tài khoản";
+            this.txtTenTaiKhoan.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtTenTaiKhoan_MouseClick);
+            this.txtTenTaiKhoan.TextChanged += new System.EventHandler(this.txtDangNhap_TextChanged);
+            this.txtTenTaiKhoan.Leave += new System.EventHandler(this.txtTenTaiKhoan_Leave);
             // 
             // pictureBox1
             // 
@@ -189,7 +193,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtMatKhau;
-        private System.Windows.Forms.TextBox txtDangNhap;
+        private System.Windows.Forms.TextBox txtTenTaiKhoan;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;

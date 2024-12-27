@@ -7,33 +7,41 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace QL_CAFE.Controllers
-{
+{  // Biến kết nối SQL
     public class KetNoiCSDL
     {
-        // Biến kết nối SQL
+        // Đảm bảo kết nối là readonly và sử dụng chuỗi kết nối đúng
         protected SqlConnection conn;
 
-        // Phương thức khởi tạo đối tượng kết nối
-        public void ketNoiCSDL()
+        // Constructor
+        public KetNoiCSDL()
         {
-            // Chuỗi kết nối đến cơ sở dữ liệu
-            string connectionString = "Data Source=MSI\\SQLEXPRESS;Initial Catalog=quanly_quancafe;Integrated Security=True;";
-
-            // Tạo đối tượng kết nối
-            conn = new SqlConnection(connectionString);
-
             try
             {
+                // Chuỗi kết nối mới
+                string connectionString = @"Data Source=MSI\SQLEXPRESS;Initial Catalog=quanly_quancafe ;Integrated Security=True";
+
+                // Khởi tạo kết nối
+                conn = new SqlConnection(connectionString);
+
                 // Mở kết nối
                 conn.Open();
-                Console.WriteLine("Kết nối cơ sở dữ liệu thành công!");
+                Console.WriteLine("Kết nối thành công");
             }
             catch (Exception ex)
             {
-                // Xử lý lỗi khi kết nối
-                Console.WriteLine("Lỗi khi kết nối cơ sở dữ liệu: " + ex.Message);
+                // Xử lý lỗi kết nối
+                Console.WriteLine("Lỗi kết nối: " + ex.Message);
+                Console.WriteLine(ex.StackTrace); // In chi tiết lỗi để dễ dàng xác định
             }
         }
+
+        // Phương thức trả về kết nối
+        public SqlConnection GetConnection()
+        {
+            return conn;
+        }
+
+
     }
-        
-    }
+}
