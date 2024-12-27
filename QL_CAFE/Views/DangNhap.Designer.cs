@@ -62,6 +62,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(755, 585);
             this.panel1.TabIndex = 1;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label3
             // 
@@ -73,6 +74,7 @@
             this.label3.Size = new System.Drawing.Size(125, 22);
             this.label3.TabIndex = 5;
             this.label3.Text = "Quên mật khẩu";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // button1
             // 
@@ -83,6 +85,7 @@
             this.button1.TabIndex = 4;
             this.button1.Text = "Đăng nhập";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtMatKhau
             // 
@@ -93,6 +96,7 @@
             this.txtMatKhau.Size = new System.Drawing.Size(399, 30);
             this.txtMatKhau.TabIndex = 3;
             this.txtMatKhau.Text = "Nhập mật khẩu";
+            this.txtMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged);
             // 
             // txtDangNhap
             // 
@@ -103,6 +107,7 @@
             this.txtDangNhap.Size = new System.Drawing.Size(426, 30);
             this.txtDangNhap.TabIndex = 2;
             this.txtDangNhap.Text = "Nhập tên đăng nhập";
+            this.txtDangNhap.TextChanged += new System.EventHandler(this.txtDangNhap_TextChanged);
             // 
             // pictureBox1
             // 
@@ -113,6 +118,7 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox3
             // 
@@ -123,6 +129,7 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 8;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
             // pictureBox2
             // 
@@ -133,6 +140,7 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 9;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // label1
             // 
@@ -143,6 +151,7 @@
             this.label1.Size = new System.Drawing.Size(243, 42);
             this.label1.TabIndex = 10;
             this.label1.Text = "ĐĂNG NHẬP";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // pictureBox4
             // 
@@ -153,6 +162,7 @@
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 11;
             this.pictureBox4.TabStop = false;
+            this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
             // 
             // DangNhap
             // 

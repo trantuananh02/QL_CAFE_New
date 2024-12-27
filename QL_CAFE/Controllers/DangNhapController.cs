@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace QL_CAFE.Controllers
 {
-    internal class DangNhapController
+    public class DangNhapController
     {
+       
     }
 }

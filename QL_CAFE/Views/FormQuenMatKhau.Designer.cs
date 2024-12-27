@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(882, 584);
+            this.ClientSize = new System.Drawing.Size(973, 460);
             this.Name = "FormQuenMatKhau";
             this.Text = "FormQuenMatKhau";
             this.ResumeLayout(false);
