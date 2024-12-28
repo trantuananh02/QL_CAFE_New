@@ -68,6 +68,7 @@
             this.cbKhuVuc = new System.Windows.Forms.ComboBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.txtBanDangChon = new System.Windows.Forms.TextBox();
+            this.dtgvDoDeChon = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBanChuaCoKhach)).BeginInit();
@@ -80,6 +81,7 @@
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDeChon)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -231,6 +233,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.dtgvDoDeChon);
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.btnBoMonDaChon);
             this.groupBox4.Controls.Add(this.btnThemDoDaChon);
@@ -453,6 +456,16 @@
             this.txtBanDangChon.Size = new System.Drawing.Size(586, 30);
             this.txtBanDangChon.TabIndex = 0;
             // 
+            // dtgvDoDeChon
+            // 
+            this.dtgvDoDeChon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgvDoDeChon.Location = new System.Drawing.Point(0, 184);
+            this.dtgvDoDeChon.Name = "dtgvDoDeChon";
+            this.dtgvDoDeChon.RowHeadersWidth = 51;
+            this.dtgvDoDeChon.RowTemplate.Height = 24;
+            this.dtgvDoDeChon.Size = new System.Drawing.Size(551, 748);
+            this.dtgvDoDeChon.TabIndex = 3;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -488,6 +501,7 @@
             this.groupBox7.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDeChon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -535,5 +549,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnTatCaKhuVuc;
+        private System.Windows.Forms.DataGridView dtgvDoDeChon;
     }
 }

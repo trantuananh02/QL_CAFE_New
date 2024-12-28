@@ -48,6 +48,8 @@
   <ItemGroup>
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\KetNoiCSDL.cs" />
+    <Compile Include="Controllers\KhuVucController.cs" />
+    <Compile Include="Models\KhuVucModel.cs" />
     <Compile Include="Views\FormQuanLyNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
