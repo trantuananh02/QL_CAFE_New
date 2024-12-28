@@ -14,6 +14,9 @@ namespace QL_CAFE.Models
         // Số điện thoại của người dùng
         public string SoDienThoai { get; set; }
 
+        // Email của người dùng
+        public string Email { get; set; }
+
         // Tên tài khoản (khóa chính)
         public string TenTK { get; set; }
 
@@ -27,10 +30,11 @@ namespace QL_CAFE.Models
         public TaiKhoan() { }
 
         // Constructor đầy đủ
-        public TaiKhoan(string hoTen, string soDienThoai, string tenTK, string matKhau, string vaiTro)
+        public TaiKhoan(string hoTen, string soDienThoai, string email, string tenTK, string matKhau, string vaiTro)
         {
             HoTen = hoTen;
             SoDienThoai = soDienThoai;
+            Email = email;
             TenTK = tenTK;
             MatKhau = matKhau;
             VaiTro = vaiTro;
@@ -39,7 +43,7 @@ namespace QL_CAFE.Models
         // Phương thức hiển thị thông tin tài khoản (ví dụ minh họa)
         public override string ToString()
         {
-            return $"TenTK: {TenTK}, VaiTro: {VaiTro}, HoTen: {HoTen}, SoDienThoai: {SoDienThoai}";
+            return $"TenTK: {TenTK}, VaiTro: {VaiTro}, HoTen: {HoTen}, SoDienThoai: {SoDienThoai}, Email: {Email}";
         }
     }
 

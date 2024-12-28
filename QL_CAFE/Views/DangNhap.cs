@@ -13,15 +13,20 @@ namespace QL_CAFE.Views
 {
     public partial class DangNhap : Form
     {
+        private bool isPasswordVisible = false;
+       
         public DangNhap()
         {
             InitializeComponent();
-            txtMatKhau.PasswordChar = '*';
+            txtMatKhau.UseSystemPasswordChar = true;
+            pictureBox4.Image = Properties.Resources.eye; 
         }
         
     private void label3_Click(object sender, EventArgs e)
         {
             FormQuenMatKhau form=new FormQuenMatKhau();
+            form.ShowDialog();
+            this.Hide();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -104,11 +109,29 @@ namespace QL_CAFE.Views
         {
 
         }
-
+        
         private void pictureBox4_Click(object sender, EventArgs e)
-        {
+        {// Đổi trạng thái hiển thị mật khẩu
+            isPasswordVisible = !isPasswordVisible;
 
+            if (isPasswordVisible)
+            {
+                // Hiện mật khẩu
+                txtMatKhau.UseSystemPasswordChar = false;
+
+                // Đổi hình ảnh sang mắt mở
+                pictureBox4.Image = Properties.Resources.hidden;
+            }
+            else
+            {
+                // Ẩn mật khẩu
+                txtMatKhau.UseSystemPasswordChar = true;
+
+                // Đổi hình ảnh sang mắt đóng
+                pictureBox4.Image = Properties.Resources.eye;
+            }
         }
+    
 
         private void txtTenTaiKhoan_MouseClick(object sender, MouseEventArgs e)
         {

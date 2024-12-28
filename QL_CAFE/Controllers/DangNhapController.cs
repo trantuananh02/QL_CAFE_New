@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace QL_CAFE.Controllers
 {
@@ -62,6 +64,27 @@ namespace QL_CAFE.Controllers
                     return false;
                 }
             }
+        public bool KiemTraEmail(String email)
+        {
+            string sql = "SELECT COUNT(*) FROM NguoiDung WHERE email = @Email";
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                    conn.Open();
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Email", email);
+
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi kiểm tra email: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
+    }
+   
     
 }
