@@ -24,9 +24,7 @@ namespace QL_CAFE.Views
         
     private void label3_Click(object sender, EventArgs e)
         {
-            FormQuenMatKhau form=new FormQuenMatKhau();
-            form.ShowDialog();
-            this.Hide();
+           
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

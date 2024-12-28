@@ -48,11 +48,11 @@
   <ItemGroup>
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\KetNoiCSDL.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Views\FormQuanLyNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Views\FormQuanLyNhanVien.Designer.cs">
+      <DependentUpon>FormQuanLyNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="FormTrangCho.cs">
       <SubType>Form</SubType>
@@ -94,6 +94,9 @@
     <EmbeddedResource Include="Views\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormQuanLyNhanVien.resx">
+      <DependentUpon>FormQuanLyNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -124,6 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="images\hidden.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\grouping.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

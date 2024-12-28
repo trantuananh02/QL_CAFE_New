@@ -29,15 +29,14 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.txtMatKhau = new System.Windows.Forms.TextBox();
-            this.txtTenTaiKhoan = new System.Windows.Forms.TextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.txtMatKhau = new System.Windows.Forms.TextBox();
+            this.txtTenTaiKhoan = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -53,7 +52,6 @@
             this.panel1.Controls.Add(this.pictureBox2);
             this.panel1.Controls.Add(this.pictureBox3);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.txtMatKhau);
             this.panel1.Controls.Add(this.txtTenTaiKhoan);
@@ -63,66 +61,6 @@
             this.panel1.Size = new System.Drawing.Size(755, 585);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(266, 52);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(243, 42);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "ĐĂNG NHẬP";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Red;
-            this.label3.Location = new System.Drawing.Point(522, 324);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(125, 22);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Quên mật khẩu";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(501, 370);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(146, 60);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Đăng nhập";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // txtMatKhau
-            // 
-            this.txtMatKhau.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMatKhau.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.txtMatKhau.Location = new System.Drawing.Point(209, 245);
-            this.txtMatKhau.Name = "txtMatKhau";
-            this.txtMatKhau.Size = new System.Drawing.Size(399, 30);
-            this.txtMatKhau.TabIndex = 3;
-            this.txtMatKhau.Text = "Nhập mật khẩu";
-            this.txtMatKhau.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtMatKhau_MouseClick);
-            this.txtMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged);
-            this.txtMatKhau.Leave += new System.EventHandler(this.txtMatKhau_Leave);
-            // 
-            // txtTenTaiKhoan
-            // 
-            this.txtTenTaiKhoan.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTenTaiKhoan.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.txtTenTaiKhoan.Location = new System.Drawing.Point(209, 178);
-            this.txtTenTaiKhoan.Name = "txtTenTaiKhoan";
-            this.txtTenTaiKhoan.Size = new System.Drawing.Size(426, 30);
-            this.txtTenTaiKhoan.TabIndex = 2;
-            this.txtTenTaiKhoan.Text = "Nhập tên tài khoản";
-            this.txtTenTaiKhoan.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtTenTaiKhoan_MouseClick);
-            this.txtTenTaiKhoan.TextChanged += new System.EventHandler(this.txtDangNhap_TextChanged);
-            this.txtTenTaiKhoan.Leave += new System.EventHandler(this.txtTenTaiKhoan_Leave);
             // 
             // pictureBox4
             // 
@@ -134,6 +72,17 @@
             this.pictureBox4.TabIndex = 11;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(266, 52);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(243, 42);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "ĐĂNG NHẬP";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // pictureBox2
             // 
@@ -168,6 +117,43 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(501, 350);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(146, 60);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Đăng nhập";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // txtMatKhau
+            // 
+            this.txtMatKhau.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMatKhau.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtMatKhau.Location = new System.Drawing.Point(209, 245);
+            this.txtMatKhau.Name = "txtMatKhau";
+            this.txtMatKhau.Size = new System.Drawing.Size(399, 30);
+            this.txtMatKhau.TabIndex = 3;
+            this.txtMatKhau.Text = "Nhập mật khẩu";
+            this.txtMatKhau.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtMatKhau_MouseClick);
+            this.txtMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged);
+            this.txtMatKhau.Leave += new System.EventHandler(this.txtMatKhau_Leave);
+            // 
+            // txtTenTaiKhoan
+            // 
+            this.txtTenTaiKhoan.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTenTaiKhoan.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtTenTaiKhoan.Location = new System.Drawing.Point(209, 178);
+            this.txtTenTaiKhoan.Name = "txtTenTaiKhoan";
+            this.txtTenTaiKhoan.Size = new System.Drawing.Size(426, 30);
+            this.txtTenTaiKhoan.TabIndex = 2;
+            this.txtTenTaiKhoan.Text = "Nhập tên tài khoản";
+            this.txtTenTaiKhoan.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtTenTaiKhoan_MouseClick);
+            this.txtTenTaiKhoan.TextChanged += new System.EventHandler(this.txtDangNhap_TextChanged);
+            this.txtTenTaiKhoan.Leave += new System.EventHandler(this.txtTenTaiKhoan_Leave);
+            // 
             // DangNhap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -190,7 +176,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtMatKhau;
         private System.Windows.Forms.TextBox txtTenTaiKhoan;
