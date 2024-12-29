@@ -51,6 +51,13 @@ namespace QL_CAFE.Views
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
+
+        private void quảnLýNhânViênToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormQuanLyNhanVien form=new FormQuanLyNhanVien();
+            form.ShowDialog();
+            this.Hide();
+        }
     }
 }
 

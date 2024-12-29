@@ -49,7 +49,9 @@
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\KetNoiCSDL.cs" />
     <Compile Include="Controllers\KhuVucController.cs" />
+    <Compile Include="Controllers\NhanVienController.cs" />
     <Compile Include="Models\KhuVucModel.cs" />
+    <Compile Include="Models\NhanVienModel.cs" />
     <Compile Include="Views\FormQuanLyNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +134,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="images\grouping.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\diskette.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\excel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bill.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

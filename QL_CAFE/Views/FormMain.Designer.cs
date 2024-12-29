@@ -46,6 +46,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dtgvDoDaChon = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.dtgvDoDeChon = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBoMonDaChon = new System.Windows.Forms.Button();
             this.btnThemDoDaChon = new System.Windows.Forms.Button();
@@ -68,7 +69,6 @@
             this.cbKhuVuc = new System.Windows.Forms.ComboBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.txtBanDangChon = new System.Windows.Forms.TextBox();
-            this.dtgvDoDeChon = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBanChuaCoKhach)).BeginInit();
@@ -77,11 +77,11 @@
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDaChon)).BeginInit();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDeChon)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDeChon)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -143,6 +143,7 @@
             this.quảnLýNhânViênToolStripMenuItem.Name = "quảnLýNhânViênToolStripMenuItem";
             this.quảnLýNhânViênToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
             this.quảnLýNhânViênToolStripMenuItem.Text = "Quản lý nhân viên";
+            this.quảnLýNhânViênToolStripMenuItem.Click += new System.EventHandler(this.quảnLýNhânViênToolStripMenuItem_Click);
             // 
             // quảnLýBànToolStripMenuItem
             // 
@@ -247,6 +248,16 @@
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Chọn đồ ";
+            // 
+            // dtgvDoDeChon
+            // 
+            this.dtgvDoDeChon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgvDoDeChon.Location = new System.Drawing.Point(0, 184);
+            this.dtgvDoDeChon.Name = "dtgvDoDeChon";
+            this.dtgvDoDeChon.RowHeadersWidth = 51;
+            this.dtgvDoDeChon.RowTemplate.Height = 24;
+            this.dtgvDoDeChon.Size = new System.Drawing.Size(551, 748);
+            this.dtgvDoDeChon.TabIndex = 3;
             // 
             // label1
             // 
@@ -456,16 +467,6 @@
             this.txtBanDangChon.Size = new System.Drawing.Size(586, 30);
             this.txtBanDangChon.TabIndex = 0;
             // 
-            // dtgvDoDeChon
-            // 
-            this.dtgvDoDeChon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvDoDeChon.Location = new System.Drawing.Point(0, 184);
-            this.dtgvDoDeChon.Name = "dtgvDoDeChon";
-            this.dtgvDoDeChon.RowHeadersWidth = 51;
-            this.dtgvDoDeChon.RowTemplate.Height = 24;
-            this.dtgvDoDeChon.Size = new System.Drawing.Size(551, 748);
-            this.dtgvDoDeChon.TabIndex = 3;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -495,13 +496,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDaChon)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDeChon)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDeChon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
