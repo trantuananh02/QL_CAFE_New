@@ -47,9 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DangNhapController.cs" />
+    <Compile Include="Controllers\DanhMucController.cs" />
     <Compile Include="Controllers\KetNoiCSDL.cs" />
     <Compile Include="Controllers\KhuVucController.cs" />
     <Compile Include="Controllers\NhanVienController.cs" />
+    <Compile Include="Models\DanhMucModel.cs" />
     <Compile Include="Models\KhuVucModel.cs" />
     <Compile Include="Models\NhanVienModel.cs" />
     <Compile Include="Views\FormQuanLyNhanVien.cs">
