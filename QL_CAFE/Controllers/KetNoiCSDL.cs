@@ -19,7 +19,7 @@ namespace QL_CAFE.Controllers
             try
             {
                 // Chuỗi kết nối mới
-                string connectionString = @"Data Source=STORKTRAN;Initial Catalog=quanly_quancafe ;Integrated Security=True";
+                string connectionString = @"Data Source=MSI\SQLEXPRESS;Initial Catalog=quanly_quancafe ;Integrated Security=True";
 
                 // Khởi tạo kết nối
                 conn = new SqlConnection(connectionString);

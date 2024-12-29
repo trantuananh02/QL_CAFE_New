@@ -20,7 +20,7 @@ namespace QL_CAFE.Controllers
             { 
 
                     // SQL truy vấn để tìm tài khoản và mật khẩu trong cơ sở dữ liệu
-                    string sql = "SELECT TenTK, MatKhau, VaiTro FROM NguoiDung WHERE TenTK = @TenTK";
+                    string sql = "SELECT TenTK, MatKhau, VaiTro FROM NhanVien WHERE TenTK = @TenTK";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@TenTK", tenTK);
