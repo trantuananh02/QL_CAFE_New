@@ -56,7 +56,7 @@ namespace QL_CAFE.Views
         {
             FormQuanLyNhanVien form=new FormQuanLyNhanVien();
             form.ShowDialog();
-            this.Hide();
+            //this.Hide();
         }
     }
 }

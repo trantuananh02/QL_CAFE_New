@@ -1,5 +1,6 @@
 ﻿using QL_CAFE.Controllers;
 using QL_CAFE.Models;
+using QL_CAFE.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -153,5 +154,12 @@ namespace QL_CAFE
         {
 
         }
+
+        private void FormQuanLyNhanVien_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+        }
+
+        
     }
 }

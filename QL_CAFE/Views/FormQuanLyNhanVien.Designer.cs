@@ -188,6 +188,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "FormQuanLyNhanVien";
             this.Text = "FormQuanLyNhanVien";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormQuanLyNhanVien_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
