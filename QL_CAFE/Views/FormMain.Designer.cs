@@ -40,13 +40,10 @@
             this.quảnLýDanhMụcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýDoanhThuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dtgvBanChuaCoKhach = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dtgvBanCoKhach = new System.Windows.Forms.DataGridView();
+            this.dtgvBan = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dtgvDoDaChon = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.dtgvDoDeChon = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBoMonDaChon = new System.Windows.Forms.Button();
             this.btnThemDoDaChon = new System.Windows.Forms.Button();
@@ -69,15 +66,15 @@
             this.cbKhuVuc = new System.Windows.Forms.ComboBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.txtBanDangChon = new System.Windows.Forms.TextBox();
+            this.pnlBan = new System.Windows.Forms.Panel();
+            this.pnlDoAnUong = new System.Windows.Forms.Panel();
+            this.btnTatCaDoAn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvBanChuaCoKhach)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvBanCoKhach)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvBan)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDaChon)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDeChon)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -171,45 +168,24 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dtgvBanChuaCoKhach);
+            this.groupBox1.Controls.Add(this.dtgvBan);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.groupBox1.Location = new System.Drawing.Point(11, 102);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(668, 403);
+            this.groupBox1.Size = new System.Drawing.Size(668, 873);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Bàn chưa có khách";
+            this.groupBox1.Text = "Danh sách bàn";
             // 
-            // dtgvBanChuaCoKhach
+            // dtgvBan
             // 
-            this.dtgvBanChuaCoKhach.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvBanChuaCoKhach.Location = new System.Drawing.Point(0, 21);
-            this.dtgvBanChuaCoKhach.Name = "dtgvBanChuaCoKhach";
-            this.dtgvBanChuaCoKhach.RowHeadersWidth = 51;
-            this.dtgvBanChuaCoKhach.RowTemplate.Height = 24;
-            this.dtgvBanChuaCoKhach.Size = new System.Drawing.Size(668, 382);
-            this.dtgvBanChuaCoKhach.TabIndex = 0;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.dtgvBanCoKhach);
-            this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox2.Location = new System.Drawing.Point(11, 511);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(668, 464);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Bàn có khách";
-            // 
-            // dtgvBanCoKhach
-            // 
-            this.dtgvBanCoKhach.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvBanCoKhach.Location = new System.Drawing.Point(0, 20);
-            this.dtgvBanCoKhach.Name = "dtgvBanCoKhach";
-            this.dtgvBanCoKhach.RowHeadersWidth = 51;
-            this.dtgvBanCoKhach.RowTemplate.Height = 24;
-            this.dtgvBanCoKhach.Size = new System.Drawing.Size(668, 444);
-            this.dtgvBanCoKhach.TabIndex = 1;
+            this.dtgvBan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgvBan.Location = new System.Drawing.Point(0, 21);
+            this.dtgvBan.Name = "dtgvBan";
+            this.dtgvBan.RowHeadersWidth = 51;
+            this.dtgvBan.RowTemplate.Height = 24;
+            this.dtgvBan.Size = new System.Drawing.Size(668, 716);
+            this.dtgvBan.TabIndex = 0;
             // 
             // groupBox3
             // 
@@ -234,7 +210,9 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.dtgvDoDeChon);
+            this.groupBox4.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.groupBox4.Controls.Add(this.btnTatCaDoAn);
+            this.groupBox4.Controls.Add(this.pnlDoAnUong);
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.btnBoMonDaChon);
             this.groupBox4.Controls.Add(this.btnThemDoDaChon);
@@ -249,20 +227,10 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Chọn đồ ";
             // 
-            // dtgvDoDeChon
-            // 
-            this.dtgvDoDeChon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvDoDeChon.Location = new System.Drawing.Point(0, 184);
-            this.dtgvDoDeChon.Name = "dtgvDoDeChon";
-            this.dtgvDoDeChon.RowHeadersWidth = 51;
-            this.dtgvDoDeChon.RowTemplate.Height = 24;
-            this.dtgvDoDeChon.Size = new System.Drawing.Size(551, 748);
-            this.dtgvDoDeChon.TabIndex = 3;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(55, 45);
+            this.label1.Location = new System.Drawing.Point(16, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 22);
             this.label1.TabIndex = 1;
@@ -305,13 +273,15 @@
             // cbDanhMucDo
             // 
             this.cbDanhMucDo.FormattingEnabled = true;
-            this.cbDanhMucDo.Location = new System.Drawing.Point(189, 42);
+            this.cbDanhMucDo.Location = new System.Drawing.Point(119, 42);
             this.cbDanhMucDo.Name = "cbDanhMucDo";
             this.cbDanhMucDo.Size = new System.Drawing.Size(270, 30);
             this.cbDanhMucDo.TabIndex = 1;
+            this.cbDanhMucDo.SelectedIndexChanged += new System.EventHandler(this.cbDanhMucDo_SelectedIndexChanged);
             // 
             // groupBox5
             // 
+            this.groupBox5.BackColor = System.Drawing.Color.LightPink;
             this.groupBox5.Controls.Add(this.btnThanhToan);
             this.groupBox5.Controls.Add(this.btnGopBan);
             this.groupBox5.Controls.Add(this.btnDoiBan);
@@ -325,33 +295,38 @@
             // 
             // btnThanhToan
             // 
+            this.btnThanhToan.BackColor = System.Drawing.Color.Cyan;
             this.btnThanhToan.Location = new System.Drawing.Point(451, 29);
             this.btnThanhToan.Name = "btnThanhToan";
             this.btnThanhToan.Size = new System.Drawing.Size(120, 50);
             this.btnThanhToan.TabIndex = 5;
             this.btnThanhToan.Text = "Thanh toán";
-            this.btnThanhToan.UseVisualStyleBackColor = true;
+            this.btnThanhToan.UseVisualStyleBackColor = false;
             // 
             // btnGopBan
             // 
+            this.btnGopBan.BackColor = System.Drawing.Color.Cyan;
             this.btnGopBan.Location = new System.Drawing.Point(250, 30);
             this.btnGopBan.Name = "btnGopBan";
             this.btnGopBan.Size = new System.Drawing.Size(120, 50);
             this.btnGopBan.TabIndex = 4;
             this.btnGopBan.Text = "Gộp bàn";
-            this.btnGopBan.UseVisualStyleBackColor = true;
+            this.btnGopBan.UseVisualStyleBackColor = false;
             // 
             // btnDoiBan
             // 
+            this.btnDoiBan.BackColor = System.Drawing.Color.Cyan;
+            this.btnDoiBan.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnDoiBan.Location = new System.Drawing.Point(58, 30);
             this.btnDoiBan.Name = "btnDoiBan";
             this.btnDoiBan.Size = new System.Drawing.Size(120, 50);
             this.btnDoiBan.TabIndex = 3;
             this.btnDoiBan.Text = "Đổi bàn";
-            this.btnDoiBan.UseVisualStyleBackColor = true;
+            this.btnDoiBan.UseVisualStyleBackColor = false;
             // 
             // groupBox6
             // 
+            this.groupBox6.BackColor = System.Drawing.Color.LightPink;
             this.groupBox6.Controls.Add(this.label4);
             this.groupBox6.Controls.Add(this.label3);
             this.groupBox6.Controls.Add(this.label2);
@@ -422,6 +397,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.BackColor = System.Drawing.Color.Transparent;
             this.groupBox7.Controls.Add(this.btnTatCaKhuVuc);
             this.groupBox7.Controls.Add(this.cbKhuVuc);
             this.groupBox7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
@@ -434,12 +410,14 @@
             // 
             // btnTatCaKhuVuc
             // 
+            this.btnTatCaKhuVuc.BackColor = System.Drawing.Color.Cyan;
             this.btnTatCaKhuVuc.Location = new System.Drawing.Point(151, 15);
             this.btnTatCaKhuVuc.Name = "btnTatCaKhuVuc";
             this.btnTatCaKhuVuc.Size = new System.Drawing.Size(95, 34);
             this.btnTatCaKhuVuc.TabIndex = 6;
             this.btnTatCaKhuVuc.Text = "Tất cả";
-            this.btnTatCaKhuVuc.UseVisualStyleBackColor = true;
+            this.btnTatCaKhuVuc.UseVisualStyleBackColor = false;
+            this.btnTatCaKhuVuc.Click += new System.EventHandler(this.btnTatCaKhuVuc_Click);
             // 
             // cbKhuVuc
             // 
@@ -448,6 +426,7 @@
             this.cbKhuVuc.Name = "cbKhuVuc";
             this.cbKhuVuc.Size = new System.Drawing.Size(339, 30);
             this.cbKhuVuc.TabIndex = 0;
+            this.cbKhuVuc.SelectedIndexChanged += new System.EventHandler(this.cbKhuVuc_SelectedIndexChanged);
             // 
             // groupBox8
             // 
@@ -462,23 +441,55 @@
             // 
             // txtBanDangChon
             // 
+            this.txtBanDangChon.BackColor = System.Drawing.Color.NavajoWhite;
+            this.txtBanDangChon.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.txtBanDangChon.ForeColor = System.Drawing.Color.Red;
             this.txtBanDangChon.Location = new System.Drawing.Point(0, 24);
             this.txtBanDangChon.Name = "txtBanDangChon";
-            this.txtBanDangChon.Size = new System.Drawing.Size(586, 30);
+            this.txtBanDangChon.ReadOnly = true;
+            this.txtBanDangChon.Size = new System.Drawing.Size(586, 39);
             this.txtBanDangChon.TabIndex = 0;
+            this.txtBanDangChon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // pnlBan
+            // 
+            this.pnlBan.AutoScroll = true;
+            this.pnlBan.Location = new System.Drawing.Point(11, 123);
+            this.pnlBan.Name = "pnlBan";
+            this.pnlBan.Size = new System.Drawing.Size(668, 846);
+            this.pnlBan.TabIndex = 1;
+            // 
+            // pnlDoAnUong
+            // 
+            this.pnlDoAnUong.Location = new System.Drawing.Point(6, 183);
+            this.pnlDoAnUong.Name = "pnlDoAnUong";
+            this.pnlDoAnUong.Size = new System.Drawing.Size(539, 743);
+            this.pnlDoAnUong.TabIndex = 9;
+            // 
+            // btnTatCaDoAn
+            // 
+            this.btnTatCaDoAn.BackColor = System.Drawing.Color.Cyan;
+            this.btnTatCaDoAn.Location = new System.Drawing.Point(395, 39);
+            this.btnTatCaDoAn.Name = "btnTatCaDoAn";
+            this.btnTatCaDoAn.Size = new System.Drawing.Size(95, 34);
+            this.btnTatCaDoAn.TabIndex = 7;
+            this.btnTatCaDoAn.Text = "Tất cả";
+            this.btnTatCaDoAn.UseVisualStyleBackColor = false;
+            this.btnTatCaDoAn.Click += new System.EventHandler(this.btnTatCaDoAn_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1924, 1023);
+            this.Controls.Add(this.pnlBan);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -489,14 +500,11 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvBanChuaCoKhach)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvBanCoKhach)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtgvBan)).EndInit();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDaChon)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDeChon)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
@@ -522,13 +530,11 @@
         private System.Windows.Forms.ToolStripMenuItem quảnLýDanhMụcToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quảnLýDoanhThuToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.DataGridView dtgvBanChuaCoKhach;
-        private System.Windows.Forms.DataGridView dtgvBanCoKhach;
+        private System.Windows.Forms.DataGridView dtgvBan;
         private System.Windows.Forms.DataGridView dtgvDoDaChon;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.GroupBox groupBox8;
@@ -550,6 +556,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnTatCaKhuVuc;
-        private System.Windows.Forms.DataGridView dtgvDoDeChon;
+        private System.Windows.Forms.Panel pnlBan;
+        private System.Windows.Forms.Panel pnlDoAnUong;
+        private System.Windows.Forms.Button btnTatCaDoAn;
     }
 }
