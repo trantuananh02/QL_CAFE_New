@@ -190,7 +190,7 @@ namespace QL_CAFE.Views
         {
             try
             {
-                BanController controllerBan = new BanController();
+                QuanLyBanController controllerBan = new QuanLyBanController();
                 dsBan = controllerBan.HienThiDanhSachBan();
 
                 // Làm sạch Panel trước khi thêm các nút bàn
@@ -257,7 +257,7 @@ namespace QL_CAFE.Views
                     int khuVucID = dskv[selectedIndex].KhuVucID; // Lấy ID của khu vực
 
                     // Gọi controller để lấy danh sách bàn theo khu vực ID
-                    BanController controllerBan = new BanController();
+                    QuanLyBanController controllerBan = new QuanLyBanController();
                     List<BanModel> danhSachBanTheoKhuVuc = controllerBan.HienThiDanhSachBanTheoKhuVuc(khuVucID);
 
                     // Hiển thị danh sách bàn
@@ -343,6 +343,12 @@ namespace QL_CAFE.Views
         private void btnTatCaDoAn_Click(object sender, EventArgs e)
         {
             HienThiDoAnUong();
+        }
+
+        private void quảnLýBànToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormQuanLyBan form = new FormQuanLyBan();
+            form.ShowDialog();
         }
     }
 }

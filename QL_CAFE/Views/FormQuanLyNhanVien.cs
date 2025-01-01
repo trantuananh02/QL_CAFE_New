@@ -422,5 +422,10 @@ namespace QL_CAFE
         MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
         }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+            HienThiDanhSachNhanVien();
+        }
     }
 }

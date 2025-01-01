@@ -37,11 +37,14 @@
     <Reference Include="DevExpress.Data.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Drawing.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v24.1.Core, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v24.1.Core, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,18 +59,25 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BanController.cs" />
     <Compile Include="Controllers\ChonDoController.cs" />
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\DanhMucController.cs" />
     <Compile Include="Controllers\KetNoiCSDL.cs" />
     <Compile Include="Controllers\KhuVucController.cs" />
     <Compile Include="Controllers\NhanVienController.cs" />
+    <Compile Include="Controllers\QuanLyBanController.cs" />
+    <Compile Include="Controllers\QuanLyKhuVucController.cs" />
     <Compile Include="Models\BanModel.cs" />
     <Compile Include="Models\ChonDoModel.cs" />
     <Compile Include="Models\DanhMucModel.cs" />
     <Compile Include="Models\KhuVucModel.cs" />
     <Compile Include="Models\NhanVienModel.cs" />
+    <Compile Include="Views\FormQuanLyBan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormQuanLyBan.Designer.cs">
+      <DependentUpon>FormQuanLyBan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\FormQuanLyNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormQuanLyBan.resx">
+      <DependentUpon>FormQuanLyBan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FormQuanLyNhanVien.resx">
       <DependentUpon>FormQuanLyNhanVien.cs</DependentUpon>
@@ -164,6 +177,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bill.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\reset.png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\search.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

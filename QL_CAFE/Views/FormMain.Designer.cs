@@ -44,6 +44,8 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dtgvDoDaChon = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnTatCaDoAn = new System.Windows.Forms.Button();
+            this.pnlDoAnUong = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBoMonDaChon = new System.Windows.Forms.Button();
             this.btnThemDoDaChon = new System.Windows.Forms.Button();
@@ -67,8 +69,6 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.txtBanDangChon = new System.Windows.Forms.TextBox();
             this.pnlBan = new System.Windows.Forms.Panel();
-            this.pnlDoAnUong = new System.Windows.Forms.Panel();
-            this.btnTatCaDoAn = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvBan)).BeginInit();
@@ -147,6 +147,7 @@
             this.quảnLýBànToolStripMenuItem.Name = "quảnLýBànToolStripMenuItem";
             this.quảnLýBànToolStripMenuItem.Size = new System.Drawing.Size(236, 26);
             this.quảnLýBànToolStripMenuItem.Text = "Quản lý bàn";
+            this.quảnLýBànToolStripMenuItem.Click += new System.EventHandler(this.quảnLýBànToolStripMenuItem_Click);
             // 
             // quảnLýMenuToolStripMenuItem
             // 
@@ -226,6 +227,24 @@
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Chọn đồ ";
+            // 
+            // btnTatCaDoAn
+            // 
+            this.btnTatCaDoAn.BackColor = System.Drawing.Color.Cyan;
+            this.btnTatCaDoAn.Location = new System.Drawing.Point(395, 39);
+            this.btnTatCaDoAn.Name = "btnTatCaDoAn";
+            this.btnTatCaDoAn.Size = new System.Drawing.Size(95, 34);
+            this.btnTatCaDoAn.TabIndex = 7;
+            this.btnTatCaDoAn.Text = "Tất cả";
+            this.btnTatCaDoAn.UseVisualStyleBackColor = false;
+            this.btnTatCaDoAn.Click += new System.EventHandler(this.btnTatCaDoAn_Click);
+            // 
+            // pnlDoAnUong
+            // 
+            this.pnlDoAnUong.Location = new System.Drawing.Point(6, 183);
+            this.pnlDoAnUong.Name = "pnlDoAnUong";
+            this.pnlDoAnUong.Size = new System.Drawing.Size(539, 743);
+            this.pnlDoAnUong.TabIndex = 9;
             // 
             // label1
             // 
@@ -458,24 +477,6 @@
             this.pnlBan.Name = "pnlBan";
             this.pnlBan.Size = new System.Drawing.Size(668, 846);
             this.pnlBan.TabIndex = 1;
-            // 
-            // pnlDoAnUong
-            // 
-            this.pnlDoAnUong.Location = new System.Drawing.Point(6, 183);
-            this.pnlDoAnUong.Name = "pnlDoAnUong";
-            this.pnlDoAnUong.Size = new System.Drawing.Size(539, 743);
-            this.pnlDoAnUong.TabIndex = 9;
-            // 
-            // btnTatCaDoAn
-            // 
-            this.btnTatCaDoAn.BackColor = System.Drawing.Color.Cyan;
-            this.btnTatCaDoAn.Location = new System.Drawing.Point(395, 39);
-            this.btnTatCaDoAn.Name = "btnTatCaDoAn";
-            this.btnTatCaDoAn.Size = new System.Drawing.Size(95, 34);
-            this.btnTatCaDoAn.TabIndex = 7;
-            this.btnTatCaDoAn.Text = "Tất cả";
-            this.btnTatCaDoAn.UseVisualStyleBackColor = false;
-            this.btnTatCaDoAn.Click += new System.EventHandler(this.btnTatCaDoAn_Click);
             // 
             // FormMain
             // 
