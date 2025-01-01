@@ -78,6 +78,12 @@
     <Compile Include="Views\FormQuanLyBan.Designer.cs">
       <DependentUpon>FormQuanLyBan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\FormQuanLyMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormQuanLyMenu.Designer.cs">
+      <DependentUpon>FormQuanLyMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\FormQuanLyNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FormQuanLyBan.resx">
       <DependentUpon>FormQuanLyBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormQuanLyMenu.resx">
+      <DependentUpon>FormQuanLyMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FormQuanLyNhanVien.resx">
       <DependentUpon>FormQuanLyNhanVien.cs</DependentUpon>

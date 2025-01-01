@@ -162,7 +162,15 @@ namespace QL_CAFE.Views
             try
             {
                 DanhMucController controllerdm = new DanhMucController();
-                dsDanhMuc = controllerdm.HienThiDanhSachDanhMuc();
+                List<DanhMucModel> danhMucList = controllerdm.HienThiDanhSachDanhMuc();
+
+                dsDanhMuc.Clear(); // Làm sạch danh sách trước khi thêm
+
+                // Duyệt qua danh sách danh mục và thêm tên vào List<string>
+                foreach (DanhMucModel danhMuc in danhMucList)
+                {
+                    dsDanhMuc.Add(danhMuc.TenDanhMuc); // Chỉ thêm tên danh mục vào dsDanhMuc
+                }
 
                 // Làm mới ComboBox (giả sử bạn có ComboBox tên cbDanhMuc)
                 cbDanhMucDo.Items.Clear();
@@ -170,7 +178,6 @@ namespace QL_CAFE.Views
                 // Thêm dữ liệu vào ComboBox
                 foreach (string tenDanhMuc in dsDanhMuc)
                 {
-                    Console.WriteLine(tenDanhMuc);
                     cbDanhMucDo.Items.Add(tenDanhMuc);
                 }
 
@@ -185,6 +192,7 @@ namespace QL_CAFE.Views
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
+
 
         private void HienThiBan()
         {
@@ -348,6 +356,12 @@ namespace QL_CAFE.Views
         private void quảnLýBànToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormQuanLyBan form = new FormQuanLyBan();
+            form.ShowDialog();
+        }
+
+        private void quảnLýMenuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormQuanLyMenu form = new FormQuanLyMenu();
             form.ShowDialog();
         }
     }

@@ -47,33 +47,125 @@ namespace QL_CAFE.Controllers
         }
 
         // Hiển thị danh sách món ăn uống theo danh mục
-        public List<ChonDoModel> HienThiDanhSachDoAnUongTheoDanhMuc(int danhMucID)
+        public List<ChonDoModel> HienThiDanhSachDoAnUongTheoDanhMuc(int? danhMucID)
         {
             List<ChonDoModel> dsDoAnUong = new List<ChonDoModel>();
-
-            // Truy vấn cơ sở dữ liệu để lấy danh sách đồ ăn uống theo DanhMucID
-            string query = "SELECT * FROM DoAnUong WHERE DanhMucID = @DanhMucID";
-
-            using (SqlCommand cmd = new SqlCommand(query, conn))
+            try
             {
-                cmd.Parameters.AddWithValue("@DanhMucID", danhMucID);
+                string query;
 
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                if (danhMucID.HasValue)
                 {
-                    while (reader.Read())
-                    {
-                        ChonDoModel doAnUong = new ChonDoModel
-                        {
-                            DoAnUongID = Convert.ToInt32(reader["DoAnUongID"]),
-                            TenDoAnUong = reader["TenDoAnUong"].ToString(),
-                        };
-                        dsDoAnUong.Add(doAnUong);
-                    }
+                    // Truy vấn theo danh mục
+                    query = "SELECT DoAnUongID, TenDoAnUong, Gia, DanhMucID FROM DoAnUong WHERE DanhMucID = @DanhMucID";
+                }
+                else
+                {
+                    // Truy vấn tất cả
+                    query = "SELECT DoAnUongID, TenDoAnUong, Gia, DanhMucID FROM DoAnUong";
                 }
 
-                return dsDoAnUong;
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    if (danhMucID.HasValue)
+                    {
+                        cmd.Parameters.AddWithValue("@DanhMucID", danhMucID.Value);
+                    }
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            ChonDoModel doAnUong = new ChonDoModel
+                            {
+                                DoAnUongID = reader.GetInt32(0),
+                                TenDoAnUong = reader.GetString(1),
+                                Gia = reader.GetDecimal(2),  // Đọc giá từ cơ sở dữ liệu
+                                DanhMucID = reader.GetInt32(3)  // Đọc DanhMucID
+                            };
+                            dsDoAnUong.Add(doAnUong);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi: {ex.Message}");
             }
 
+            return dsDoAnUong;
         }
+
+        public bool KiemTraDoAnUongTonTai(int doAnUongID)
+        {
+            try
+            {
+                string query = "SELECT COUNT(*) FROM DoAnUong WHERE DoAnUongID = @DoAnUongID";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@DoAnUongID", doAnUongID);
+                    int count = (int)cmd.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi kiểm tra món ăn/uống tồn tại: " + ex.Message);
+            }
+        }
+        public bool ThemDoAnUong(ChonDoModel doAnUong)
+        {
+            try
+            {
+                string query = "INSERT INTO DoAnUong (TenDoAnUong, Gia, DanhMucID) VALUES (@TenDoAnUong, @Gia, @DanhMucID)";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@TenDoAnUong", doAnUong.TenDoAnUong);
+                    cmd.Parameters.AddWithValue("@Gia", doAnUong.Gia);
+                    cmd.Parameters.AddWithValue("@DanhMucID", doAnUong.DanhMucID);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi thêm món ăn/uống: " + ex.Message);
+            }
+        }
+        public bool CapNhatDoAnUong(ChonDoModel doAnUong)
+        {
+            try
+            {
+                string query = "UPDATE DoAnUong SET TenDoAnUong = @TenDoAnUong, Gia = @Gia, DanhMucID = @DanhMucID WHERE DoAnUongID = @DoAnUongID";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@TenDoAnUong", doAnUong.TenDoAnUong);
+                    cmd.Parameters.AddWithValue("@Gia", doAnUong.Gia);
+                    cmd.Parameters.AddWithValue("@DanhMucID", doAnUong.DanhMucID);
+                    cmd.Parameters.AddWithValue("@DoAnUongID", doAnUong.DoAnUongID);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi cập nhật món ăn/uống: " + ex.Message);
+            }
+        }
+        public bool XoaDoAnUong(int doAnUongID)
+        {
+            try
+            {
+                string query = "DELETE FROM DoAnUong WHERE DoAnUongID = @DoAnUongID";
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@DoAnUongID", doAnUongID);
+                    return cmd.ExecuteNonQuery() > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Lỗi xóa món ăn/uống: " + ex.Message);
+            }
+        }
+
     }
 }
