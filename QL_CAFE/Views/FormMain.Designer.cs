@@ -39,14 +39,12 @@
             this.quảnLýMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýDanhMụcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dtgvBan = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dtgvDoDaChon = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnTatCaDoAn = new System.Windows.Forms.Button();
             this.pnlDoAnUong = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnBoMonDaChon = new System.Windows.Forms.Button();
             this.btnThemDoDaChon = new System.Windows.Forms.Button();
             this.btnTimKiemDo = new System.Windows.Forms.Button();
             this.txtTimKiemDo = new System.Windows.Forms.TextBox();
@@ -69,8 +67,6 @@
             this.txtBanDangChon = new System.Windows.Forms.TextBox();
             this.pnlBan = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvBan)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDaChon)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -162,32 +158,21 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dtgvBan);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.groupBox1.Location = new System.Drawing.Point(11, 102);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(668, 873);
+            this.groupBox1.Size = new System.Drawing.Size(461, 873);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh sách bàn";
-            // 
-            // dtgvBan
-            // 
-            this.dtgvBan.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvBan.Location = new System.Drawing.Point(0, 21);
-            this.dtgvBan.Name = "dtgvBan";
-            this.dtgvBan.RowHeadersWidth = 51;
-            this.dtgvBan.RowTemplate.Height = 24;
-            this.dtgvBan.Size = new System.Drawing.Size(668, 716);
-            this.dtgvBan.TabIndex = 0;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dtgvDoDaChon);
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox3.Location = new System.Drawing.Point(729, 102);
+            this.groupBox3.Location = new System.Drawing.Point(490, 102);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(586, 534);
+            this.groupBox3.Size = new System.Drawing.Size(865, 534);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Đồ đã chọn";
@@ -195,11 +180,12 @@
             // dtgvDoDaChon
             // 
             this.dtgvDoDaChon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvDoDaChon.Location = new System.Drawing.Point(0, 21);
+            this.dtgvDoDaChon.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtgvDoDaChon.Location = new System.Drawing.Point(3, 26);
             this.dtgvDoDaChon.Name = "dtgvDoDaChon";
             this.dtgvDoDaChon.RowHeadersWidth = 51;
             this.dtgvDoDaChon.RowTemplate.Height = 24;
-            this.dtgvDoDaChon.Size = new System.Drawing.Size(586, 513);
+            this.dtgvDoDaChon.Size = new System.Drawing.Size(859, 505);
             this.dtgvDoDaChon.TabIndex = 2;
             // 
             // groupBox4
@@ -208,7 +194,6 @@
             this.groupBox4.Controls.Add(this.btnTatCaDoAn);
             this.groupBox4.Controls.Add(this.pnlDoAnUong);
             this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Controls.Add(this.btnBoMonDaChon);
             this.groupBox4.Controls.Add(this.btnThemDoDaChon);
             this.groupBox4.Controls.Add(this.btnTimKiemDo);
             this.groupBox4.Controls.Add(this.txtTimKiemDo);
@@ -216,7 +201,7 @@
             this.groupBox4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.groupBox4.Location = new System.Drawing.Point(1361, 43);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(551, 932);
+            this.groupBox4.Size = new System.Drawing.Size(551, 873);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Chọn đồ ";
@@ -248,27 +233,19 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Danh mục";
             // 
-            // btnBoMonDaChon
-            // 
-            this.btnBoMonDaChon.Location = new System.Drawing.Point(434, 115);
-            this.btnBoMonDaChon.Name = "btnBoMonDaChon";
-            this.btnBoMonDaChon.Size = new System.Drawing.Size(52, 48);
-            this.btnBoMonDaChon.TabIndex = 8;
-            this.btnBoMonDaChon.Text = "button6";
-            this.btnBoMonDaChon.UseVisualStyleBackColor = true;
-            // 
             // btnThemDoDaChon
             // 
-            this.btnThemDoDaChon.Location = new System.Drawing.Point(359, 114);
+            this.btnThemDoDaChon.Location = new System.Drawing.Point(478, 114);
             this.btnThemDoDaChon.Name = "btnThemDoDaChon";
             this.btnThemDoDaChon.Size = new System.Drawing.Size(52, 48);
             this.btnThemDoDaChon.TabIndex = 7;
-            this.btnThemDoDaChon.Text = "button5";
+            this.btnThemDoDaChon.Text = "+";
             this.btnThemDoDaChon.UseVisualStyleBackColor = true;
+            this.btnThemDoDaChon.Click += new System.EventHandler(this.btnThemDoDaChon_Click);
             // 
             // btnTimKiemDo
             // 
-            this.btnTimKiemDo.Location = new System.Drawing.Point(279, 115);
+            this.btnTimKiemDo.Location = new System.Drawing.Point(395, 114);
             this.btnTimKiemDo.Name = "btnTimKiemDo";
             this.btnTimKiemDo.Size = new System.Drawing.Size(52, 48);
             this.btnTimKiemDo.TabIndex = 6;
@@ -277,9 +254,9 @@
             // 
             // txtTimKiemDo
             // 
-            this.txtTimKiemDo.Location = new System.Drawing.Point(6, 132);
+            this.txtTimKiemDo.Location = new System.Drawing.Point(6, 124);
             this.txtTimKiemDo.Name = "txtTimKiemDo";
-            this.txtTimKiemDo.Size = new System.Drawing.Size(247, 30);
+            this.txtTimKiemDo.Size = new System.Drawing.Size(371, 30);
             this.txtTimKiemDo.TabIndex = 3;
             // 
             // cbDanhMucDo
@@ -298,9 +275,9 @@
             this.groupBox5.Controls.Add(this.btnGopBan);
             this.groupBox5.Controls.Add(this.btnDoiBan);
             this.groupBox5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox5.Location = new System.Drawing.Point(729, 865);
+            this.groupBox5.Location = new System.Drawing.Point(493, 865);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(586, 110);
+            this.groupBox5.Size = new System.Drawing.Size(822, 110);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Thao tác";
@@ -346,9 +323,9 @@
             this.groupBox6.Controls.Add(this.txtKhachTra);
             this.groupBox6.Controls.Add(this.txtTongTien);
             this.groupBox6.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.groupBox6.Location = new System.Drawing.Point(729, 642);
+            this.groupBox6.Location = new System.Drawing.Point(496, 642);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(586, 197);
+            this.groupBox6.Size = new System.Drawing.Size(819, 197);
             this.groupBox6.TabIndex = 4;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Thông tin";
@@ -415,7 +392,7 @@
             this.groupBox7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.groupBox7.Location = new System.Drawing.Point(11, 43);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(668, 53);
+            this.groupBox7.Size = new System.Drawing.Size(416, 53);
             this.groupBox7.TabIndex = 4;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Khu vực";
@@ -423,7 +400,7 @@
             // btnTatCaKhuVuc
             // 
             this.btnTatCaKhuVuc.BackColor = System.Drawing.Color.Cyan;
-            this.btnTatCaKhuVuc.Location = new System.Drawing.Point(151, 15);
+            this.btnTatCaKhuVuc.Location = new System.Drawing.Point(85, 13);
             this.btnTatCaKhuVuc.Name = "btnTatCaKhuVuc";
             this.btnTatCaKhuVuc.Size = new System.Drawing.Size(95, 34);
             this.btnTatCaKhuVuc.TabIndex = 6;
@@ -434,9 +411,9 @@
             // cbKhuVuc
             // 
             this.cbKhuVuc.FormattingEnabled = true;
-            this.cbKhuVuc.Location = new System.Drawing.Point(286, 18);
+            this.cbKhuVuc.Location = new System.Drawing.Point(204, 16);
             this.cbKhuVuc.Name = "cbKhuVuc";
-            this.cbKhuVuc.Size = new System.Drawing.Size(339, 30);
+            this.cbKhuVuc.Size = new System.Drawing.Size(199, 30);
             this.cbKhuVuc.TabIndex = 0;
             this.cbKhuVuc.SelectedIndexChanged += new System.EventHandler(this.cbKhuVuc_SelectedIndexChanged);
             // 
@@ -444,9 +421,9 @@
             // 
             this.groupBox8.Controls.Add(this.txtBanDangChon);
             this.groupBox8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox8.Location = new System.Drawing.Point(729, 43);
+            this.groupBox8.Location = new System.Drawing.Point(493, 43);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(586, 54);
+            this.groupBox8.Size = new System.Drawing.Size(859, 54);
             this.groupBox8.TabIndex = 5;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Bàn đang chọn";
@@ -454,12 +431,13 @@
             // txtBanDangChon
             // 
             this.txtBanDangChon.BackColor = System.Drawing.Color.NavajoWhite;
+            this.txtBanDangChon.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtBanDangChon.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.txtBanDangChon.ForeColor = System.Drawing.Color.Red;
-            this.txtBanDangChon.Location = new System.Drawing.Point(0, 24);
+            this.txtBanDangChon.Location = new System.Drawing.Point(3, 26);
             this.txtBanDangChon.Name = "txtBanDangChon";
             this.txtBanDangChon.ReadOnly = true;
-            this.txtBanDangChon.Size = new System.Drawing.Size(586, 39);
+            this.txtBanDangChon.Size = new System.Drawing.Size(853, 39);
             this.txtBanDangChon.TabIndex = 0;
             this.txtBanDangChon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -468,7 +446,7 @@
             this.pnlBan.AutoScroll = true;
             this.pnlBan.Location = new System.Drawing.Point(11, 123);
             this.pnlBan.Name = "pnlBan";
-            this.pnlBan.Size = new System.Drawing.Size(668, 846);
+            this.pnlBan.Size = new System.Drawing.Size(455, 846);
             this.pnlBan.TabIndex = 1;
             // 
             // FormMain
@@ -493,8 +471,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvBan)).EndInit();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtgvDoDaChon)).EndInit();
             this.groupBox4.ResumeLayout(false);
@@ -527,7 +503,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.DataGridView dtgvBan;
         private System.Windows.Forms.DataGridView dtgvDoDaChon;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.GroupBox groupBox8;
@@ -535,7 +510,6 @@
         private System.Windows.Forms.TextBox txtKhachTra;
         private System.Windows.Forms.TextBox txtTongTien;
         private System.Windows.Forms.TextBox txtBanDangChon;
-        private System.Windows.Forms.Button btnBoMonDaChon;
         private System.Windows.Forms.Button btnThemDoDaChon;
         private System.Windows.Forms.Button btnTimKiemDo;
         private System.Windows.Forms.TextBox txtTimKiemDo;

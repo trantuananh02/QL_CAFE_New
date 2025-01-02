@@ -59,17 +59,21 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\ChiTietHoaDonController.cs" />
     <Compile Include="Controllers\ChonDoController.cs" />
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\DanhMucController.cs" />
+    <Compile Include="Controllers\HoaDonController.cs" />
     <Compile Include="Controllers\KetNoiCSDL.cs" />
     <Compile Include="Controllers\KhuVucController.cs" />
     <Compile Include="Controllers\NhanVienController.cs" />
     <Compile Include="Controllers\QuanLyBanController.cs" />
     <Compile Include="Controllers\QuanLyKhuVucController.cs" />
     <Compile Include="Models\BanModel.cs" />
+    <Compile Include="Models\ChiTietHoaDonModel.cs" />
     <Compile Include="Models\ChonDoModel.cs" />
     <Compile Include="Models\DanhMucModel.cs" />
+    <Compile Include="Models\HoaDonModel.cs" />
     <Compile Include="Models\KhuVucModel.cs" />
     <Compile Include="Models\NhanVienModel.cs" />
     <Compile Include="Views\FormQuanLyBan.cs">
@@ -110,6 +114,12 @@
     <Compile Include="Views\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\FormThemDoUongVaoHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormThemDoUongVaoHoaDon.Designer.cs">
+      <DependentUpon>FormThemDoUongVaoHoaDon.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormTrangCho.resx">
       <DependentUpon>FormTrangCho.cs</DependentUpon>
     </EmbeddedResource>
@@ -137,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FormQuanLyNhanVien.resx">
       <DependentUpon>FormQuanLyNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormThemDoUongVaoHoaDon.resx">
+      <DependentUpon>FormThemDoUongVaoHoaDon.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

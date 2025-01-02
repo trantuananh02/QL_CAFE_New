@@ -27,8 +27,18 @@ namespace QL_CAFE.Views
             HienThiDanhMuc(); // Gọi hàm hiển thị danh mục
             HienThiBan(); // Gọi hàm hiển thị bàn
             HienThiDoAnUong(); // Gọi hàm hiển thị đồ ăn uống
+            KhoiTaoBangDoDaChon();
         }
+        private string tenMonDuocChon;
+        private decimal giaMonDuocChon; // Giá của món được chọn
 
+
+        private void ChonMon(string tenMon, decimal gia)
+        {
+            tenMonDuocChon = tenMon;
+            giaMonDuocChon = gia; // Gán giá món vào biến
+            MessageBox.Show($"Bạn đã chọn món: {tenMon}\nGiá: {gia}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
         private void HienThiDoAnUong()
         {
             try
@@ -60,11 +70,21 @@ namespace QL_CAFE.Views
                     lblTenDoAn.Size = new Size(itemWidth - 10, 20); // Chiều cao cho tên món ăn
                     lblTenDoAn.TextAlign = ContentAlignment.MiddleCenter;
 
-                    // Thêm Label vào Panel
-                    panelItem.Controls.Add(lblTenDoAn);
+                    Label lblGiaDoAn = new Label();
+                    lblGiaDoAn.Text = $"{doAnUong.Gia}"; // Hiển thị giá
+                    lblGiaDoAn.Location = new Point(5, 30);
+                    lblGiaDoAn.Size = new Size(itemWidth - 10, 20);
+                    lblGiaDoAn.TextAlign = ContentAlignment.MiddleCenter;
 
-                    // Thêm Panel vào pnlDoAnUong
+                    // Gắn sự kiện click
+                    panelItem.Click += (s, e) => ChonMon(doAnUong.TenDoAnUong, doAnUong.Gia);
+                    lblTenDoAn.Click += (s, e) => ChonMon(doAnUong.TenDoAnUong, doAnUong.Gia);
+                    lblGiaDoAn.Click += (s, e) => ChonMon(doAnUong.TenDoAnUong, doAnUong.Gia);
+
+                    panelItem.Controls.Add(lblTenDoAn);
+                    panelItem.Controls.Add(lblGiaDoAn);
                     pnlDoAnUong.Controls.Add(panelItem);
+
 
                     // Tính toán vị trí của item tiếp theo
                     x += itemWidth + margin;
@@ -193,7 +213,8 @@ namespace QL_CAFE.Views
             }
         }
 
-
+        // Biến toàn cục lưu BanID khi click vào bàn
+        private int selectedBanID = 0;
         private void HienThiBan()
         {
             try
@@ -224,10 +245,14 @@ namespace QL_CAFE.Views
                     else if (ban.TrangThai == "Đang Sử Dụng")
                         btnBan.BackColor = Color.LightCoral;
 
-                    // Thêm sự kiện click để hiển thị số bàn vào txtBanDangChon
+                    // Thêm sự kiện click để lưu BanID vào biến
                     btnBan.Click += (s, e) =>
                     {
-                        txtBanDangChon.Text = ban.SoBan.ToString(); // Cập nhật số bàn vào TextBox
+                        // Lưu BanID vào biến selectedBanID
+                        selectedBanID = ban.BanID;  // Giả sử BanModel có thuộc tính BanID
+
+                        // Hiển thị thông tin bàn trong TextBox
+                        txtBanDangChon.Text = ban.SoBan.ToString();
                     };
 
                     // Thêm nút vào Panel
@@ -364,6 +389,81 @@ namespace QL_CAFE.Views
             FormQuanLyMenu form = new FormQuanLyMenu();
             form.ShowDialog();
         }
+
+        //hiển thị món ăn đã chọn 
+        private void KhoiTaoBangDoDaChon()
+        {
+            // Xóa hết các cột và dòng hiện tại
+            dtgvDoDaChon.Columns.Clear();
+            dtgvDoDaChon.Rows.Clear();
+
+            // Cột Đồ ăn uống
+            DataGridViewTextBoxColumn colDoAnUong = new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Tên món",
+                Name = "DoAnUong",
+                ReadOnly = false,
+                Width = 200
+            };
+            dtgvDoDaChon.Columns.Add(colDoAnUong);
+
+            // Cột Số lượng
+            DataGridViewTextBoxColumn colSoLuong = new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Số lượng",
+                Name = "SoLuong",
+                ReadOnly = false,
+                Width = 20
+            };
+            dtgvDoDaChon.Columns.Add(colSoLuong);
+
+            // Cột Giá tiền
+            DataGridViewTextBoxColumn colGiaTien = new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Giá tiền",
+                Name = "GiaTien",
+                ReadOnly = false,
+                Width = 170
+            };
+            dtgvDoDaChon.Columns.Add(colGiaTien);
+
+            // Cột Thành tiền
+            DataGridViewTextBoxColumn colThanhTien = new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Thành tiền",
+                Name = "ThanhTien",
+                ReadOnly = true, // Không cho phép chỉnh sửa vì giá trị này tính tự động
+                Width = 170
+            };
+            dtgvDoDaChon.Columns.Add(colThanhTien);
+
+            // Thiết lập DataGridView
+            dtgvDoDaChon.AllowUserToAddRows = false; // Không cho phép thêm dòng mới khi không có dữ liệu
+            dtgvDoDaChon.AllowUserToDeleteRows = false; // Không cho phép xóa dòng
+            dtgvDoDaChon.AllowUserToOrderColumns = true; // Cho phép sắp xếp các cột
+            dtgvDoDaChon.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // Chọn toàn bộ dòng khi click
+            dtgvDoDaChon.MultiSelect = false; // Không cho phép chọn nhiều dòng
+            dtgvDoDaChon.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Tự động điều chỉnh kích thước cột
+        }
+
+        private void HienThiDoAnDaChon()
+        {
+
+        }
+
+        private void btnThemDoDaChon_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(tenMonDuocChon))
+            {
+                MessageBox.Show("Vui lòng chọn một món trước khi thêm!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            FormThemDoUongVaoHoaDon form = new FormThemDoUongVaoHoaDon();
+            form.CapNhatTenMon(tenMonDuocChon, giaMonDuocChon); // Truyền tên món sang form con
+            form.ShowDialog();
+        }
+
     }
 }
 
