@@ -7,7 +7,7 @@ using QL_CAFE.Controllers;
 
 namespace QL_CAFE.Models
 {
-    public class ChonDoModel : KetNoiCSDL
+    public class DoAnUongModel : KetNoiCSDL
     {
         // Định nghĩa lớp tương ứng với bảng DoAnUong trong cơ sở dữ liệu
         public int DoAnUongID { get; set; } // Khóa chính

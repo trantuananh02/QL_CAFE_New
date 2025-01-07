@@ -187,6 +187,7 @@
             this.dtgvDoDaChon.RowTemplate.Height = 24;
             this.dtgvDoDaChon.Size = new System.Drawing.Size(859, 505);
             this.dtgvDoDaChon.TabIndex = 2;
+            this.dtgvDoDaChon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dtgvDoDaChon_MouseClick);
             // 
             // groupBox4
             // 

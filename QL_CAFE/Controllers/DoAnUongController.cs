@@ -5,12 +5,12 @@ using QL_CAFE.Models;
 
 namespace QL_CAFE.Controllers
 {
-    public class ChonDoController : KetNoiCSDL
+    public class DoAnUongController : KetNoiCSDL
     {
         // Hiển thị danh sách các món ăn uống
-        public List<ChonDoModel> HienThiDanhSachDoAnUong()
+        public List<DoAnUongModel> HienThiDanhSachDoAnUong()
         {
-            List<ChonDoModel> danhSachDoAnUong = new List<ChonDoModel>();
+            List<DoAnUongModel> danhSachDoAnUong = new List<DoAnUongModel>();
 
             try
             {
@@ -25,7 +25,7 @@ namespace QL_CAFE.Controllers
                         // Đọc dữ liệu và thêm thông tin món ăn uống vào danh sách
                         while (reader.Read())
                         {
-                            ChonDoModel doAnUong = new ChonDoModel
+                            DoAnUongModel doAnUong = new DoAnUongModel
                             {
                                 DoAnUongID = reader.GetInt32(0),
                                 TenDoAnUong = reader.GetString(1),
@@ -47,9 +47,9 @@ namespace QL_CAFE.Controllers
         }
 
         // Hiển thị danh sách món ăn uống theo danh mục
-        public List<ChonDoModel> HienThiDanhSachDoAnUongTheoDanhMuc(int? danhMucID)
+        public List<DoAnUongModel> HienThiDanhSachDoAnUongTheoDanhMuc(int? danhMucID)
         {
-            List<ChonDoModel> dsDoAnUong = new List<ChonDoModel>();
+            List<DoAnUongModel> dsDoAnUong = new List<DoAnUongModel>();
             try
             {
                 string query;
@@ -76,7 +76,7 @@ namespace QL_CAFE.Controllers
                     {
                         while (reader.Read())
                         {
-                            ChonDoModel doAnUong = new ChonDoModel
+                            DoAnUongModel doAnUong = new DoAnUongModel
                             {
                                 DoAnUongID = reader.GetInt32(0),
                                 TenDoAnUong = reader.GetString(1),
@@ -113,7 +113,7 @@ namespace QL_CAFE.Controllers
                 throw new Exception("Lỗi kiểm tra món ăn/uống tồn tại: " + ex.Message);
             }
         }
-        public bool ThemDoAnUong(ChonDoModel doAnUong)
+        public bool ThemDoAnUong(DoAnUongModel doAnUong)
         {
             try
             {
@@ -131,7 +131,7 @@ namespace QL_CAFE.Controllers
                 throw new Exception("Lỗi thêm món ăn/uống: " + ex.Message);
             }
         }
-        public bool CapNhatDoAnUong(ChonDoModel doAnUong)
+        public bool CapNhatDoAnUong(DoAnUongModel doAnUong)
         {
             try
             {

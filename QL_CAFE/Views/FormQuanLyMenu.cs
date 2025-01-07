@@ -15,7 +15,7 @@ namespace QL_CAFE.Views
     public partial class FormQuanLyMenu : Form
     {
         List<DanhMucModel> dsdm = new List<DanhMucModel>();
-        List<ChonDoModel> dsBan = new List<ChonDoModel>();
+        List<DoAnUongModel> dsBan = new List<DoAnUongModel>();
         public FormQuanLyMenu()
         {
             InitializeComponent();
@@ -253,8 +253,8 @@ namespace QL_CAFE.Views
                     Console.WriteLine("Hiển thị danh mục: " + (danhMucID.HasValue ? danhMucID.Value.ToString() : "Tất cả"));
 
                     // Gọi controller để lấy danh sách đồ ăn/uống theo danh mục (hoặc tất cả nếu danhMucID là null)
-                    ChonDoController controller = new ChonDoController();
-                    List<ChonDoModel> danhSachDoAnUongTheoDanhMuc = controller.HienThiDanhSachDoAnUongTheoDanhMuc(danhMucID);
+                    DoAnUongController controller = new DoAnUongController();
+                    List<DoAnUongModel> danhSachDoAnUongTheoDanhMuc = controller.HienThiDanhSachDoAnUongTheoDanhMuc(danhMucID);
 
                     tblMonTheoDanhMuc.Rows.Clear(); // Xóa dữ liệu cũ trong bảng
 
@@ -263,7 +263,7 @@ namespace QL_CAFE.Views
                         // Hiển thị danh sách đồ ăn/uống
                         for (int i = 0; i < danhSachDoAnUongTheoDanhMuc.Count; i++)
                         {
-                            ChonDoModel doAnUong = danhSachDoAnUongTheoDanhMuc[i];
+                            DoAnUongModel doAnUong = danhSachDoAnUongTheoDanhMuc[i];
                             tblMonTheoDanhMuc.Rows.Add(
                                 i + 1, // Số thứ tự
                                 doAnUong.DoAnUongID,
@@ -291,14 +291,14 @@ namespace QL_CAFE.Views
         {
             try
             {
-                ChonDoController doAnUongController = new ChonDoController();
-                List<ChonDoModel> dsDoAnUong = doAnUongController.HienThiDanhSachDoAnUong();
+                DoAnUongController doAnUongController = new DoAnUongController();
+                List<DoAnUongModel> dsDoAnUong = doAnUongController.HienThiDanhSachDoAnUong();
 
                 tblMonTheoDanhMuc.Rows.Clear();
 
                 for (int i = 0; i < dsDoAnUong.Count; i++)
                 {
-                    ChonDoModel doAnUong = dsDoAnUong[i];
+                    DoAnUongModel doAnUong = dsDoAnUong[i];
                     tblMonTheoDanhMuc.Rows.Add(
                         i + 1, // Số thứ tự
                         doAnUong.DoAnUongID,
@@ -369,7 +369,7 @@ namespace QL_CAFE.Views
             try
             {
                 bool isSuccess = true;
-                ChonDoController doAnUongController = new ChonDoController();
+                DoAnUongController doAnUongController = new DoAnUongController();
 
                 // Lặp qua từng dòng trong bảng
                 foreach (DataGridViewRow row in tblMonTheoDanhMuc.Rows)
@@ -399,7 +399,7 @@ namespace QL_CAFE.Views
                     }
 
                     // Tạo đối tượng ChonDoModel
-                    ChonDoModel doAnUong = new ChonDoModel
+                    DoAnUongModel doAnUong = new DoAnUongModel
                     {
                         DoAnUongID = doAnUongID,
                         TenDoAnUong = tenDoAnUong,
@@ -460,7 +460,7 @@ namespace QL_CAFE.Views
                 DialogResult confirm = MessageBox.Show("Bạn có chắc chắn muốn xóa món ăn/uống này?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (confirm == DialogResult.Yes)
                 {
-                    ChonDoController doAnUongController = new ChonDoController();
+                    DoAnUongController doAnUongController = new DoAnUongController();
 
                     // Gọi phương thức xóa món ăn/uống từ controller
                     if (doAnUongController.XoaDoAnUong(doAnUongID))

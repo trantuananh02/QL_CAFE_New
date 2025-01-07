@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ChiTietHoaDonController.cs" />
-    <Compile Include="Controllers\ChonDoController.cs" />
+    <Compile Include="Controllers\DoAnUongController.cs" />
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\DanhMucController.cs" />
     <Compile Include="Controllers\HoaDonController.cs" />
@@ -71,7 +71,7 @@
     <Compile Include="Controllers\QuanLyKhuVucController.cs" />
     <Compile Include="Models\BanModel.cs" />
     <Compile Include="Models\ChiTietHoaDonModel.cs" />
-    <Compile Include="Models\ChonDoModel.cs" />
+    <Compile Include="Models\DoAnUongModel.cs" />
     <Compile Include="Models\DanhMucModel.cs" />
     <Compile Include="Models\HoaDonModel.cs" />
     <Compile Include="Models\KhuVucModel.cs" />
