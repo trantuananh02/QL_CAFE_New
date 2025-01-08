@@ -155,6 +155,71 @@ namespace QL_CAFE.Controllers
         }
 
 
+        public bool ChuyenHoaDon(int banNguonID, int banDichID)
+        {
+            try
+            {
+                // Kiểm tra xem bàn nguồn có hóa đơn chưa thanh toán không
+                int hoaDonNguonID = LayHoaDonIDTheoBan(banNguonID);
+                if (hoaDonNguonID == 0)
+                {
+                    MessageBox.Show("Không tìm thấy hóa đơn chưa thanh toán ở bàn nguồn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+
+                // Kiểm tra xem bàn đích có hóa đơn chưa thanh toán không
+                int hoaDonDichID = LayHoaDonIDTheoBan(banDichID);
+                if (hoaDonDichID > 0)
+                {
+                    MessageBox.Show("Bàn đích đã có hóa đơn chưa thanh toán!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+
+                // Cập nhật BanID của hóa đơn sang bàn đích
+                string queryUpdateHoaDon = @"
+            UPDATE HoaDon
+            SET BanID = @BanDichID
+            WHERE HoaDonID = @HoaDonNguonID";
+
+                using (SqlCommand cmdUpdateHoaDon = new SqlCommand(queryUpdateHoaDon, conn))
+                {
+                    cmdUpdateHoaDon.Parameters.AddWithValue("@BanDichID", banDichID);
+                    cmdUpdateHoaDon.Parameters.AddWithValue("@HoaDonNguonID", hoaDonNguonID);
+                    cmdUpdateHoaDon.ExecuteNonQuery();
+                }
+
+                // Cập nhật trạng thái bàn
+                string queryUpdateBanNguon = @"
+            UPDATE Ban
+            SET TrangThai = N'Trống'
+            WHERE BanID = @BanNguonID";
+
+                string queryUpdateBanDich = @"
+            UPDATE Ban
+            SET TrangThai = N'Đang Sử Dụng'
+            WHERE BanID = @BanDichID";
+
+                using (SqlCommand cmdUpdateBanNguon = new SqlCommand(queryUpdateBanNguon, conn))
+                {
+                    cmdUpdateBanNguon.Parameters.AddWithValue("@BanNguonID", banNguonID);
+                    cmdUpdateBanNguon.ExecuteNonQuery();
+                }
+
+                using (SqlCommand cmdUpdateBanDich = new SqlCommand(queryUpdateBanDich, conn))
+                {
+                    cmdUpdateBanDich.Parameters.AddWithValue("@BanDichID", banDichID);
+                    cmdUpdateBanDich.ExecuteNonQuery();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi chuyển hóa đơn: {ex.Message}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
 
 
 

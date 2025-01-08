@@ -303,6 +303,7 @@
             this.btnGopBan.TabIndex = 4;
             this.btnGopBan.Text = "Gộp bàn";
             this.btnGopBan.UseVisualStyleBackColor = false;
+            this.btnGopBan.Click += new System.EventHandler(this.btnGopBan_Click);
             // 
             // btnDoiBan
             // 
@@ -314,6 +315,7 @@
             this.btnDoiBan.TabIndex = 3;
             this.btnDoiBan.Text = "Đổi bàn";
             this.btnDoiBan.UseVisualStyleBackColor = false;
+            this.btnDoiBan.Click += new System.EventHandler(this.btnDoiBan_Click);
             // 
             // groupBox6
             // 

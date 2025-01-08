@@ -76,6 +76,18 @@
     <Compile Include="Models\HoaDonModel.cs" />
     <Compile Include="Models\KhuVucModel.cs" />
     <Compile Include="Models\NhanVienModel.cs" />
+    <Compile Include="Views\FormChuyenBan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormChuyenBan.Designer.cs">
+      <DependentUpon>FormChuyenBan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormGopBan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormGopBan.Designer.cs">
+      <DependentUpon>FormGopBan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\FormQuanLyBan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +147,12 @@
     </Compile>
     <EmbeddedResource Include="Views\DangNhap.resx">
       <DependentUpon>DangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormChuyenBan.resx">
+      <DependentUpon>FormChuyenBan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormGopBan.resx">
+      <DependentUpon>FormGopBan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>

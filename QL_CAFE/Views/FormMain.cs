@@ -699,6 +699,23 @@ namespace QL_CAFE.Views
             labTienThua.Text = tienThua.ToString("N0"); // Hiển thị tiền thừa dưới dạng số nguyên với dấu phân cách
         }
 
+        private void btnDoiBan_Click(object sender, EventArgs e)
+        {
+            // Tạo một instance của FormChuyenBan
+            FormChuyenBan formChuyenBan = new FormChuyenBan();
+
+            // Hiển thị form (dùng ShowDialog nếu muốn modal)
+            formChuyenBan.ShowDialog();
+        }
+
+        private void btnGopBan_Click(object sender, EventArgs e)
+        {
+            // Tạo một instance của FormChuyenBan
+            FormGopBan formGopBan = new FormGopBan();
+
+            // Hiển thị form (dùng ShowDialog nếu muốn modal)
+            formGopBan.ShowDialog();
+        }
     }
 }
 
