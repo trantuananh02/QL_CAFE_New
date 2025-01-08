@@ -11,6 +11,7 @@ namespace QL_CAFE.Controllers
 {
     public class ChiTietHoaDonController : KetNoiCSDL
     {
+
         // Hàm lấy danh sách món ăn đã chọn của bàn
         public List<ChiTietHoaDonModel> LayChiTietHoaDonTheoBan(int banID)
         {
@@ -50,7 +51,118 @@ namespace QL_CAFE.Controllers
            
 
             return chiTietHoaDonList;
+
         }
+        public int LayHoaDonIDTheoBan(int banID)
+        {
+            int hoaDonID = 0;
+            string query = "SELECT HoaDonID FROM HoaDon WHERE BanID = @BanID AND TrangThai = N'Chưa Thanh Toán'";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@BanID", banID);
+
+            try
+            {
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    hoaDonID = Convert.ToInt32(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lấy hóa đơn theo bàn: {ex.Message}");
+            }
+
+            return hoaDonID;
+        }
+
+        public bool ThemMonVaoHoaDon(int banID, int doAnUongID, int soLuong, string nhanVienID, int hoaDonID)
+        {
+            try
+            {
+                HoaDonController hoaDonController = new HoaDonController();
+
+                // Nếu chưa có hóa đơn, tạo mới hóa đơn
+                if (hoaDonID == 0)
+                {
+                    hoaDonID = hoaDonController.TaoMoiHoaDon(banID, nhanVienID);
+                    if (hoaDonID == 0)
+                    {
+                        MessageBox.Show("Không thể tạo hóa đơn mới.");
+                        return false;
+                    }
+                }
+
+                // Lấy giá của món ăn
+                decimal gia = 0;
+                string queryGetGia = @"
+SELECT Gia 
+FROM DoAnUong 
+WHERE DoAnUongID = @DoAnUongID";
+
+                using (SqlCommand cmdGia = new SqlCommand(queryGetGia, conn))
+                {
+                    cmdGia.Parameters.AddWithValue("@DoAnUongID", doAnUongID);
+                    gia = Convert.ToDecimal(cmdGia.ExecuteScalar());
+                }
+
+                // Kiểm tra xem món ăn đã tồn tại trong ChiTietHoaDon hay chưa
+                string queryCheckExist = @"
+SELECT COUNT(*) 
+FROM ChiTietHoaDon 
+WHERE HoaDonID = @HoaDonID AND DoAnUongID = @DoAnUongID";
+
+                int count = 0;
+                using (SqlCommand cmdCheckExist = new SqlCommand(queryCheckExist, conn))
+                {
+                    cmdCheckExist.Parameters.AddWithValue("@HoaDonID", hoaDonID);
+                    cmdCheckExist.Parameters.AddWithValue("@DoAnUongID", doAnUongID);
+                    count = (int)cmdCheckExist.ExecuteScalar();
+                }
+
+                if (count > 0) // Nếu món ăn đã tồn tại, cập nhật số lượng
+                {
+                    string queryUpdate = @"
+UPDATE ChiTietHoaDon 
+SET SoLuong = SoLuong + @SoLuong 
+WHERE HoaDonID = @HoaDonID AND DoAnUongID = @DoAnUongID";
+
+                    using (SqlCommand cmdUpdate = new SqlCommand(queryUpdate, conn))
+                    {
+                        cmdUpdate.Parameters.AddWithValue("@HoaDonID", hoaDonID);
+                        cmdUpdate.Parameters.AddWithValue("@DoAnUongID", doAnUongID);
+                        cmdUpdate.Parameters.AddWithValue("@SoLuong", soLuong);
+                        cmdUpdate.ExecuteNonQuery();
+                    }
+                }
+                else // Nếu món ăn chưa tồn tại, thêm mới món ăn vào chi tiết hóa đơn
+                {
+                    string queryAddChiTiet = @"
+INSERT INTO ChiTietHoaDon (HoaDonID, DoAnUongID, SoLuong, Gia) 
+VALUES (@HoaDonID, @DoAnUongID, @SoLuong, @Gia)";
+
+                    using (SqlCommand cmdAdd = new SqlCommand(queryAddChiTiet, conn))
+                    {
+                        cmdAdd.Parameters.AddWithValue("@HoaDonID", hoaDonID);
+                        cmdAdd.Parameters.AddWithValue("@DoAnUongID", doAnUongID);
+                        cmdAdd.Parameters.AddWithValue("@SoLuong", soLuong);
+                        cmdAdd.Parameters.AddWithValue("@Gia", gia);
+                        cmdAdd.ExecuteNonQuery();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log hoặc xử lý ngoại lệ
+                Console.WriteLine("Error: " + ex.Message);
+                return false;
+            }
+        }
+
+
         public bool ThemMonVaoChiTietHoaDon(int hoaDonID, int doAnUongID, int soLuong)
         {
             try
@@ -77,30 +189,42 @@ namespace QL_CAFE.Controllers
                     return false; // Trả về false nếu không có giá hợp lệ
                 }
 
-                // Thêm món ăn vào ChiTietHoaDon
-                string queryInsert = "INSERT INTO ChiTietHoaDon (HoaDonID, DoAnUongID, SoLuong, Gia) " +
-                                     "VALUES (@HoaDonID, @DoAnUongID, @SoLuong, @Gia)";
-                SqlCommand cmdInsert = new SqlCommand(queryInsert, conn);
-                cmdInsert.Parameters.AddWithValue("@HoaDonID", hoaDonID);
-                cmdInsert.Parameters.AddWithValue("@DoAnUongID", doAnUongID);
-                cmdInsert.Parameters.AddWithValue("@SoLuong", soLuong);
-                cmdInsert.Parameters.AddWithValue("@Gia", gia);
+                // Kiểm tra xem món ăn đã có trong ChiTietHoaDon chưa
+                string queryCheckExist = "SELECT COUNT(*) FROM ChiTietHoaDon WHERE HoaDonID = @HoaDonID AND DoAnUongID = @DoAnUongID";
+                SqlCommand cmdCheckExist = new SqlCommand(queryCheckExist, conn);
+                cmdCheckExist.Parameters.AddWithValue("@HoaDonID", hoaDonID);
+                cmdCheckExist.Parameters.AddWithValue("@DoAnUongID", doAnUongID);
 
-                // Thực thi câu lệnh và kiểm tra kết quả
-                int rowsAffected = cmdInsert.ExecuteNonQuery();
+                int count = (int)cmdCheckExist.ExecuteScalar(); // Sử dụng ExecuteScalar để lấy số lượng món ăn đã có
 
-                // Cập nhật tổng tiền trong HoaDon
-                if (rowsAffected > 0)
+                if (count > 0) // Nếu món ăn đã có, cập nhật số lượng
                 {
-                    string queryUpdateTongTien = "UPDATE HoaDon " +
-                                                 "SET TongTien = (SELECT SUM(SoLuong * Gia) FROM ChiTietHoaDon WHERE HoaDonID = @HoaDonID) " +
-                                                 "WHERE HoaDonID = @HoaDonID";
-                    SqlCommand cmdUpdateTongTien = new SqlCommand(queryUpdateTongTien, conn);
-                    cmdUpdateTongTien.Parameters.AddWithValue("@HoaDonID", hoaDonID);
-                    cmdUpdateTongTien.ExecuteNonQuery();
+                    string queryUpdate = "UPDATE ChiTietHoaDon " +
+                                         "SET SoLuong = SoLuong + @SoLuong " +
+                                         "WHERE HoaDonID = @HoaDonID AND DoAnUongID = @DoAnUongID";
+                    SqlCommand cmdUpdate = new SqlCommand(queryUpdate, conn);
+                    cmdUpdate.Parameters.AddWithValue("@HoaDonID", hoaDonID);
+                    cmdUpdate.Parameters.AddWithValue("@DoAnUongID", doAnUongID);
+                    cmdUpdate.Parameters.AddWithValue("@SoLuong", soLuong);
+
+                    // Thực thi câu lệnh cập nhật
+                    cmdUpdate.ExecuteNonQuery();
+                }
+                else // Nếu món ăn chưa có, thêm mới
+                {
+                    string queryInsert = "INSERT INTO ChiTietHoaDon (HoaDonID, DoAnUongID, SoLuong, Gia) " +
+                                         "VALUES (@HoaDonID, @DoAnUongID, @SoLuong, @Gia)";
+                    SqlCommand cmdInsert = new SqlCommand(queryInsert, conn);
+                    cmdInsert.Parameters.AddWithValue("@HoaDonID", hoaDonID);
+                    cmdInsert.Parameters.AddWithValue("@DoAnUongID", doAnUongID);
+                    cmdInsert.Parameters.AddWithValue("@SoLuong", soLuong);
+                    cmdInsert.Parameters.AddWithValue("@Gia", gia);
+
+                    // Thực thi câu lệnh thêm mới
+                    cmdInsert.ExecuteNonQuery();
                 }
 
-                return rowsAffected > 0; // Trả về true nếu thêm thành công, ngược lại trả về false
+                return true; // Trả về true nếu thực hiện thành công
             }
             catch (Exception ex)
             {
@@ -108,37 +232,49 @@ namespace QL_CAFE.Controllers
                 return false; // Trả về false nếu có lỗi
             }
         }
+
         public bool XoaMonKhoiChiTietHoaDon(int chiTietID, int hoaDonID)
         {
             try
             {
-                // Xóa món khỏi ChiTietHoaDon
-                string queryDelete = "DELETE FROM ChiTietHoaDon WHERE ChiTietID = @ChiTietID";
-                SqlCommand cmdDelete = new SqlCommand(queryDelete, conn);
-                cmdDelete.Parameters.AddWithValue("@ChiTietID", chiTietID);
+                // Xóa món khỏi chi tiết hóa đơn
+                string queryDeleteChiTiet = @"
+        DELETE FROM ChiTietHoaDon 
+        WHERE ChiTietID = @ChiTietID AND HoaDonID = @HoaDonID";
 
-                // Thực thi câu lệnh xóa
-                int rowsAffected = cmdDelete.ExecuteNonQuery();
-
-                // Nếu xóa thành công, cập nhật lại tổng tiền trong hóa đơn
-                if (rowsAffected > 0)
+                using (SqlCommand cmdDeleteChiTiet = new SqlCommand(queryDeleteChiTiet, conn))
                 {
-                    string queryUpdateTongTien = "UPDATE HoaDon " +
-                                                 "SET TongTien = (SELECT SUM(SoLuong * Gia) FROM ChiTietHoaDon WHERE HoaDonID = @HoaDonID) " +
-                                                 "WHERE HoaDonID = @HoaDonID";
-                    SqlCommand cmdUpdateTongTien = new SqlCommand(queryUpdateTongTien, conn);
+                    cmdDeleteChiTiet.Parameters.AddWithValue("@ChiTietID", chiTietID);
+                    cmdDeleteChiTiet.Parameters.AddWithValue("@HoaDonID", hoaDonID);
+                    cmdDeleteChiTiet.ExecuteNonQuery();
+                }
+
+                // Cập nhật tổng tiền của hóa đơn sau khi xóa món
+                string queryUpdateTongTien = @"
+        UPDATE HoaDon
+        SET TongTien = (
+            SELECT ISNULL(SUM(SoLuong * Gia), 0)
+            FROM ChiTietHoaDon
+            WHERE HoaDonID = @HoaDonID
+        )
+        WHERE HoaDonID = @HoaDonID";
+
+                using (SqlCommand cmdUpdateTongTien = new SqlCommand(queryUpdateTongTien, conn))
+                {
                     cmdUpdateTongTien.Parameters.AddWithValue("@HoaDonID", hoaDonID);
                     cmdUpdateTongTien.ExecuteNonQuery();
                 }
 
-                return rowsAffected > 0; // Trả về true nếu xóa thành công
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi xóa món khỏi chi tiết hóa đơn: {ex.Message}");
-                return false; // Trả về false nếu có lỗi
+                return false;
             }
         }
+
+
 
         public int LayChiTietIDTheoHoaDon(int hoaDonID)
         {

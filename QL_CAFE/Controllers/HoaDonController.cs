@@ -37,37 +37,150 @@ namespace QL_CAFE.Controllers
                 return false;
             }
         }
-        public int LayHoaDonIDTheoBan(int banID)
+
+        public int TaoMoiHoaDon(int banID, string nhanVienID)
         {
+            int hoaDonID = 0;
+            string queryCreateHoaDon = @"
+        INSERT INTO HoaDon (BanID, NhanVienID, TongTien, TrangThai) 
+        VALUES (@BanID, @NhanVienID, 0, N'Chưa Thanh Toán');
+        SELECT SCOPE_IDENTITY();";
+
             try
             {
-                // Sử dụng truy vấn SQL để lấy HoaDonID của bàn có trạng thái 'Chưa Thanh Toán'
-                string query = "SELECT HoaDonID FROM HoaDon WHERE BanID = @BanID AND TrangThai = N'Chưa Thanh Toán'";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmdCreate = new SqlCommand(queryCreateHoaDon, conn))
                 {
-                    cmd.Parameters.AddWithValue("@BanID", banID);
-
-                    // Thực thi truy vấn và lấy HoaDonID
-                    object result = cmd.ExecuteScalar();
-
-                    // Kiểm tra nếu có kết quả trả về
+                    cmdCreate.Parameters.AddWithValue("@BanID", banID);
+                    cmdCreate.Parameters.AddWithValue("@NhanVienID", nhanVienID);
+                    object result = cmdCreate.ExecuteScalar();
                     if (result != null)
                     {
-                        return (int)result; // Trả về HoaDonID
+                        hoaDonID = Convert.ToInt32(result);
                     }
-                    else
-                    {
-                        return -1; // Nếu không tìm thấy hóa đơn, trả về -1 (hoặc giá trị bạn muốn xử lý)
-                    }
+                }
+
+                // Cập nhật trạng thái bàn thành "Đang sử dụng"
+                string queryUpdateBan = @"
+        UPDATE Ban
+        SET TrangThai = N'Đang Sử Dụng'
+        WHERE BanID = @BanID";
+
+                using (SqlCommand cmdUpdateBan = new SqlCommand(queryUpdateBan, conn))
+                {
+                    cmdUpdateBan.Parameters.AddWithValue("@BanID", banID);
+                    cmdUpdateBan.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
             {
-                // Xử lý lỗi nếu có
-                MessageBox.Show("Lỗi khi lấy HoaDonID: " + ex.Message);
-                return -1; // Trả về -1 nếu có lỗi
+                MessageBox.Show($"Lỗi khi tạo mới hóa đơn: {ex.Message}");
             }
+
+            return hoaDonID;
+        }
+        public bool ThanhToanHoaDon(int hoaDonID)
+        {
+            try
+            {
+                // Cập nhật trạng thái hóa đơn là "Đã Thanh Toán"
+                string queryUpdateHoaDon = @"
+        UPDATE HoaDon 
+        SET TrangThai = N'Đã Thanh Toán', NgayThanhToan = GETDATE() 
+        WHERE HoaDonID = @HoaDonID";
+
+                using (SqlCommand cmdUpdateHoaDon = new SqlCommand(queryUpdateHoaDon, conn))
+                {
+                    cmdUpdateHoaDon.Parameters.AddWithValue("@HoaDonID", hoaDonID);
+                    cmdUpdateHoaDon.ExecuteNonQuery();
+                }
+
+                // Lấy BanID của hóa đơn
+                int banID = 0;
+                string queryGetBanID = @"
+        SELECT BanID 
+        FROM HoaDon 
+        WHERE HoaDonID = @HoaDonID";
+
+                using (SqlCommand cmdGetBanID = new SqlCommand(queryGetBanID, conn))
+                {
+                    cmdGetBanID.Parameters.AddWithValue("@HoaDonID", hoaDonID);
+                    object result = cmdGetBanID.ExecuteScalar();
+                    if (result != null)
+                    {
+                        banID = Convert.ToInt32(result);
+                    }
+                }
+
+                // Cập nhật trạng thái bàn về 'Trống'
+                if (banID > 0)
+                {
+                    string queryUpdateBan = @"
+            UPDATE Ban
+            SET TrangThai = N'Trống'
+            WHERE BanID = @BanID";
+
+                    using (SqlCommand cmdUpdateBan = new SqlCommand(queryUpdateBan, conn))
+                    {
+                        cmdUpdateBan.Parameters.AddWithValue("@BanID", banID);
+                        cmdUpdateBan.ExecuteNonQuery();
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi thanh toán hóa đơn: {ex.Message}");
+                return false;
+            }
+        }
+
+
+        public decimal LayTongTienHoaDon(int hoaDonID)
+        {
+            decimal tongTien = 0;
+            string query = "SELECT TongTien FROM HoaDon WHERE HoaDonID = @HoaDonID";
+
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@HoaDonID", hoaDonID);
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    tongTien = Convert.ToDecimal(result);
+                }
+            }
+
+            return tongTien;
+        }
+
+
+
+
+
+
+        public int LayHoaDonIDTheoBan(int banID)
+        {
+            int hoaDonID = 0;
+            string query = "SELECT HoaDonID FROM HoaDon WHERE BanID = @BanID AND TrangThai = N'Chưa Thanh Toán'";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@BanID", banID);
+
+            try
+            {
+                object result = cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    hoaDonID = Convert.ToInt32(result);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lấy hóa đơn theo bàn: {ex.Message}");
+            }
+
+            return hoaDonID;
         }
 
     }

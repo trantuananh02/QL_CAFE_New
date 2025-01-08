@@ -82,9 +82,15 @@ namespace QL_CAFE.Views
                     if (isSuccess)
                     {
                         MessageBox.Show("Đã xóa món thành công.");
-                        // Cập nhật lại giao diện DataGridView sau khi xóa món
+
+                        // Xóa món khỏi danh sách chi tiết và DataGridView
                         danhSachChiTiet.RemoveAt(rowIndex);
-                        dtgvDoDaChon.Rows.RemoveAt(rowIndex); // Xóa dòng đã xóa từ DataGridView
+                        dtgvDoDaChon.Rows.RemoveAt(rowIndex);
+
+                        // Cập nhật lại tổng tiền của hóa đơn
+                        HoaDonController hoaDonController = new HoaDonController();
+                        decimal tongTien = hoaDonController.LayTongTienHoaDon(chiTiet.HoaDonID);
+                        labTongTien.Text = tongTien.ToString("N0"); // Hiển thị tổng tiền dưới dạng số nguyên với dấu phân cách
                     }
                     else
                     {
@@ -96,6 +102,14 @@ namespace QL_CAFE.Views
             {
                 MessageBox.Show("Dòng được chọn không hợp lệ.");
             }
+        }
+        private void MoFormThemMon(string tenDoAn, decimal gia)
+        {
+            // Tạo form và truyền dữ liệu món ăn
+            FormThemDoUongVaoHoaDon form = new FormThemDoUongVaoHoaDon(tenDoAn, gia);
+
+            // Hiển thị form dưới dạng dialog (modal)
+            form.ShowDialog();
         }
 
         private void HienThiDoAnUong()
@@ -118,7 +132,7 @@ namespace QL_CAFE.Views
                 {
                     // Tạo nút mới cho mỗi món ăn
                     Button btnDoAn = new Button();
-                    btnDoAn.Text = $"{doAnUong.TenDoAnUong}\n{doAnUong.Gia} VND"; // Hiển thị tên và giá
+                    btnDoAn.Text = $"{doAnUong.TenDoAnUong}\n{(int)doAnUong.Gia:N0} VND"; // Hiển thị tên và giá
                     btnDoAn.Size = new Size(buttonWidth, buttonHeight);
                     btnDoAn.Location = new Point(x, y);
                     btnDoAn.BackColor = Color.White;
@@ -127,11 +141,22 @@ namespace QL_CAFE.Views
                     // Gắn sự kiện click
                     btnDoAn.Click += (s, e) =>
                     {
-                        DoAnID = doAnUong.DoAnUongID;
-                        MoFormThemMon(doAnUong.TenDoAnUong, doAnUong.Gia);
-                        Console.WriteLine(DoAnID);
+                        // Kiểm tra nếu bàn chưa được chọn
+                        if (selectedBanID == 0) // Giả sử selectedBanID là biến lưu thông tin bàn đã chọn
+                        {
+                            // Hiển thị thông báo yêu cầu người dùng chọn bàn
+                            MessageBox.Show("Hãy chọn bàn trước khi chọn món!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            // Nếu đã chọn bàn, tiến hành chọn món
+                            DoAnID = doAnUong.DoAnUongID;
+                            MoFormThemMon(doAnUong.TenDoAnUong, doAnUong.Gia);
+                        }
                     };
-                    
+
+
+
                     // Thêm nút vào Panel
                     pnlDoAnUong.Controls.Add(btnDoAn);
 
@@ -150,79 +175,67 @@ namespace QL_CAFE.Views
             }
         }
 
-        
-        private void MoFormThemMon(string tenDoAn, decimal gia)
-        {
-            // Tạo form và truyền dữ liệu món ăn
-            FormThemDoUongVaoHoaDon form = new FormThemDoUongVaoHoaDon(tenDoAn, gia);
-
-            // Hiển thị form dưới dạng dialog (modal)
-            form.ShowDialog();
-        }
-
         private void HienThiDoAnUongTheoDanhMuc(List<DoAnUongModel> dsDoAnTheoDanhMuc)
         {
             try
             {
-                pnlDoAnUong.Controls.Clear(); // Làm sạch Panel trước khi hiển thị lại
+                // Làm sạch Panel trước khi hiển thị lại
+                pnlDoAnUong.Controls.Clear();
 
                 int x = 10; // Vị trí X ban đầu
                 int y = 10; // Vị trí Y ban đầu
-                int itemWidth = 120; // Chiều rộng của item (chỉ có tên món ăn)
-                int itemHeight = 120; // Chiều cao của item
-                int margin = 10; // Khoảng cách giữa các món ăn
+                int buttonWidth = 120; // Chiều rộng của nút
+                int buttonHeight = 120; // Chiều cao của nút
+                int margin = 10; // Khoảng cách giữa các nút
 
                 foreach (DoAnUongModel doAnUong in dsDoAnTheoDanhMuc)
                 {
-                    // Tạo Panel cho mỗi món ăn
-                    Panel panelItem = new Panel();
-                    panelItem.Size = new Size(itemWidth, itemHeight);
-                    panelItem.Location = new Point(x, y);
-                    panelItem.BorderStyle = BorderStyle.FixedSingle;
-                    panelItem.BackColor = Color.White;
-
-                    // Tạo Label để hiển thị tên món ăn
-                    Label lblTenDoAn = new Label();
-                    lblTenDoAn.Text = doAnUong.TenDoAnUong;
-                    lblTenDoAn.Location = new Point(5, (itemHeight - 20) / 2); // Canh giữa tên món ăn
-                    lblTenDoAn.Size = new Size(itemWidth - 10, 20); // Chiều cao cho tên món ăn
-                    lblTenDoAn.TextAlign = ContentAlignment.MiddleCenter;
-                    Label lblGiaDoAn = new Label();
-                    lblGiaDoAn.Text = $"{doAnUong.Gia}"; // Hiển thị giá
-                    lblGiaDoAn.Location = new Point(5, 30);
-                    lblGiaDoAn.Size = new Size(itemWidth - 10, 20);
-                    lblGiaDoAn.TextAlign = ContentAlignment.MiddleCenter;
+                    // Tạo nút mới cho mỗi món ăn
+                    Button btnDoAn = new Button
+                    {
+                        Text = $"{doAnUong.TenDoAnUong}\n{(int)doAnUong.Gia:N0} VND", // Hiển thị tên và giá
+                        Size = new Size(buttonWidth, buttonHeight),
+                        Location = new Point(x, y),
+                        BackColor = Color.White,
+                        TextAlign = ContentAlignment.MiddleCenter
+                    };
 
                     // Gắn sự kiện click
+                    btnDoAn.Click += (s, e) =>
+                    {
+                        // Kiểm tra nếu bàn chưa được chọn
+                        if (selectedBanID == 0) // Giả sử selectedBanID là biến lưu thông tin bàn đã chọn
+                        {
+                            // Hiển thị thông báo yêu cầu người dùng chọn bàn
+                            MessageBox.Show("Hãy chọn bàn trước khi chọn món!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                        else
+                        {
+                            // Nếu đã chọn bàn, tiến hành chọn món
+                            DoAnID = doAnUong.DoAnUongID;
+                            MoFormThemMon(doAnUong.TenDoAnUong, doAnUong.Gia);
+                        }
+                    };
 
-                    panelItem.Click += (s, e) => MoFormThemMon(doAnUong.TenDoAnUong, doAnUong.Gia);
-                    lblTenDoAn.Click += (s, e) => MoFormThemMon(doAnUong.TenDoAnUong, doAnUong.Gia);
-                    lblGiaDoAn.Click += (s, e) => MoFormThemMon(doAnUong.TenDoAnUong, doAnUong.Gia);
+                    // Thêm nút vào Panel
+                    pnlDoAnUong.Controls.Add(btnDoAn);
 
-                    panelItem.Controls.Add(lblTenDoAn);
-                    panelItem.Controls.Add(lblGiaDoAn);
-                    pnlDoAnUong.Controls.Add(panelItem);
-
-                    // Thêm Label vào Panel
-                    panelItem.Controls.Add(lblTenDoAn);
-
-                    // Thêm Panel vào pnlDoAnUong
-                    pnlDoAnUong.Controls.Add(panelItem);
-
-                    // Tính toán vị trí của item tiếp theo
-                    x += itemWidth + margin;
-                    if (x + itemWidth > pnlDoAnUong.Width)
+                    // Tính toán vị trí của nút tiếp theo
+                    x += buttonWidth + margin;
+                    if (x + buttonWidth > pnlDoAnUong.Width)
                     {
                         x = 10;
-                        y += itemHeight + margin;
+                        y += buttonHeight + margin;
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi: " + ex.Message);
+                MessageBox.Show($"Lỗi: {ex.Message}");
             }
         }
+
+
 
         private void HienThiKhuVuc()
         {
@@ -289,7 +302,7 @@ namespace QL_CAFE.Views
 
         // Biến toàn cục lưu BanID khi click vào bàn
        
-        private void HienThiBan()
+        public void HienThiBan()
         {
             try
             {
@@ -324,12 +337,12 @@ namespace QL_CAFE.Views
                     {
                         // Lưu BanID vào biến selectedBanID
                         selectedBanID = ban.BanID;  // Giả sử BanModel có thuộc tính BanID
-                        //Console.WriteLine(selectedBanID);
+                        Console.WriteLine("Bàn nè ae:"+selectedBanID);
                         // Hiển thị thông tin bàn trong TextBox
                         txtBanDangChon.Text = ban.SoBan.ToString();
                          HienThiChiTietHoaDonTheoBan();
                         LayHoaDonID();
-                        
+                        HienThiTongTien();
                     };
 
                     // Thêm nút vào Panel
@@ -542,12 +555,11 @@ namespace QL_CAFE.Views
             dtgvDoDaChon.MultiSelect = false; // Không cho phép chọn nhiều dòng
             dtgvDoDaChon.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Tự động điều chỉnh kích thước cột
         }
-        
+
         public void HienThiChiTietHoaDonTheoBan()
         {
-           // Console.WriteLine(selectedBanID);
             ChiTietHoaDonController controller = new ChiTietHoaDonController();
-          danhSachChiTiet = controller.LayChiTietHoaDonTheoBan(selectedBanID);
+            danhSachChiTiet = controller.LayChiTietHoaDonTheoBan(selectedBanID);
 
             dtgvDoDaChon.Rows.Clear(); // Xóa dữ liệu cũ
 
@@ -556,11 +568,14 @@ namespace QL_CAFE.Views
                 dtgvDoDaChon.Rows.Add(
                     chiTiet.TenDoAnUong,
                     chiTiet.SoLuong,
-                    chiTiet.Gia,
-                    chiTiet.SoLuong * chiTiet.Gia // Tính thành tiền
+                    chiTiet.Gia.ToString("N0") + " VND", // Định dạng giá
+                    (chiTiet.SoLuong * chiTiet.Gia).ToString("N0") + " VND" // Định dạng thành tiền
                 );
             }
+            HienThiTongTien();
         }
+
+
 
         private void btnThemDoDaChon_Click(object sender, EventArgs e)
         {
@@ -586,6 +601,104 @@ namespace QL_CAFE.Views
                 }
             }
         }
+
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (FormMain.selectedBanID == 0)
+                {
+                    MessageBox.Show("Vui lòng chọn bàn trước khi thanh toán.");
+                    return;
+                }
+
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn thanh toán bàn này?", "Xác nhận thanh toán", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    HoaDonController hoaDonController = new HoaDonController();
+
+                    // Lấy idHoaDon của bàn đang chọn
+                    int hoaDonID = hoaDonController.LayHoaDonIDTheoBan(FormMain.selectedBanID);
+
+                    if (hoaDonID > 0)
+                    {
+                        bool isSuccess = hoaDonController.ThanhToanHoaDon(hoaDonID);
+
+                        if (isSuccess)
+                        {
+                            MessageBox.Show("Thanh toán thành công.");
+
+                            // Cập nhật trạng thái bàn
+                            HienThiBan();
+                            HienThiChiTietHoaDonTheoBan();
+
+                            // Làm trống các giá trị trong labTongTien, txtKhachTra và labTienThua
+                            labTongTien.Text = "0";
+                            txtKhachTra.Text = "";
+                            labTienThua.Text = "0";
+                        }
+                        else
+                        {
+                            MessageBox.Show("Có lỗi xảy ra khi thanh toán.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy hóa đơn cho bàn này.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message);
+            }
+        }
+
+        // tính tiền
+        private void HienThiTongTien()
+        {
+            HoaDonController hoaDonController = new HoaDonController();
+
+            // Lấy idHoaDon của bàn đang chọn
+            int hoaDonID = hoaDonController.LayHoaDonIDTheoBan(FormMain.selectedBanID);
+
+            if (hoaDonID > 0)
+            {
+                decimal tongTien = hoaDonController.LayTongTienHoaDon(hoaDonID);
+                labTongTien.Text = tongTien.ToString("N0") + " VND"; // Hiển thị tổng tiền dưới dạng số nguyên với dấu phân cách và đơn vị VND
+            }
+            else
+            {
+                labTongTien.Text = "0 VND"; // Nếu không có hóa đơn, hiển thị 0
+            }
+        }
+
+
+        private void txtKhachTra_TextChanged(object sender, EventArgs e)
+        {
+            decimal tongTien = 0;
+            decimal khachTra = 0;
+
+            // Lấy tổng tiền từ labTongTien
+            if (!decimal.TryParse(labTongTien.Text, out tongTien))
+            {
+                tongTien = 0;
+            }
+
+            // Lấy tiền khách trả từ txtKhachTra
+            if (!decimal.TryParse(txtKhachTra.Text, out khachTra))
+            {
+                khachTra = 0;
+            }
+
+            // Tính tiền thừa
+            decimal tienThua = khachTra - tongTien;
+
+            // Hiển thị tiền thừa
+            labTienThua.Text = tienThua.ToString("N0"); // Hiển thị tiền thừa dưới dạng số nguyên với dấu phân cách
+        }
+
     }
 }
 

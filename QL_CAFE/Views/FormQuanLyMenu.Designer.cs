@@ -294,9 +294,9 @@
             this.label1.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(129, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(460, 42);
+            this.label1.Size = new System.Drawing.Size(248, 42);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Quản lý danh mục và Menu";
+            this.label1.Text = "Quản lý Menu";
             // 
             // tblMonTheoDanhMuc
             // 
@@ -330,7 +330,7 @@
             this.groupBox2.Size = new System.Drawing.Size(904, 931);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Danh sách Danh mục";
+            this.groupBox2.Text = "Nhóm món ăn";
             // 
             // tblDanhMuc
             // 
@@ -466,7 +466,7 @@
             this.groupBox1.Size = new System.Drawing.Size(1007, 931);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Danh sách món theo danh mục";
+            this.groupBox1.Text = "Danh sách món ăn";
             // 
             // cboDanhMuc
             // 
