@@ -1,4 +1,5 @@
-﻿using QL_CAFE.Controllers;
+﻿using DevExpress.XtraWaitForm;
+using QL_CAFE.Controllers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,120 +15,74 @@ namespace QL_CAFE.Views
     public partial class DangNhap : Form
     {
         private bool isPasswordVisible = false;
+        public static string username; // Biến static lưu tên tài khoản
+
        
+
         public DangNhap()
         {
             InitializeComponent();
             txtMatKhau.UseSystemPasswordChar = true;
-            pictureBox4.Image = Properties.Resources.eye; 
-        }
-        
-    private void label3_Click(object sender, EventArgs e)
-        {
+            pictureBox4.Image = Properties.Resources.eye;
+
+            // Đặt giá trị mặc định
+            txtTenTaiKhoan.Text = "Nhập tên tài khoản";
+            txtTenTaiKhoan.ForeColor = Color.Gray;
+
+            txtMatKhau.Text = "Nhập mật khẩu";
+            txtMatKhau.ForeColor = Color.Gray;
+
            
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
 
-            try
+            string tenTaiKhoan = txtTenTaiKhoan.Text.Trim();
+            string matKhau = txtMatKhau.Text;
+
+            // Kiểm tra nếu vẫn còn placeholder thì báo lỗi
+            if (tenTaiKhoan == "Nhập tên tài khoản" || string.IsNullOrEmpty(tenTaiKhoan))
             {
-                // Check if the username and password fields are empty or have placeholder text
-                if (txtTenTaiKhoan.Text == "Nhập tên tài khoản" || string.IsNullOrEmpty(txtTenTaiKhoan.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập tên tài khoản.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                if (txtMatKhau.Text == "Nhập mật khẩu" || string.IsNullOrEmpty(txtMatKhau.Text))
-                {
-                    MessageBox.Show("Vui lòng nhập mật khẩu.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Create an instance of DangNhapController and get the values from the textboxes
-                DangNhapController controller = new DangNhapController();
-                string tentk = txtTenTaiKhoan.Text;
-                string pass = txtMatKhau.Text;
-
-                // Call the DangNhap method in the controller to check login
-                bool isLoggedIn = controller.DangNhap(tentk, pass);
-
-                // Check login result
-                if (!isLoggedIn)
-                {
-                    MessageBox.Show("Tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại.", "Lỗi đăng nhập", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    MessageBox.Show("Đăng nhập thành công!", "Chào mừng", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    FormMain main= new FormMain();
-                    main.Show();
-                    this.Hide(); // Hide the current login form
-                }
+                MessageBox.Show("Vui lòng nhập tên tài khoản!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTenTaiKhoan.Focus();
+                return;
             }
-            catch (Exception ex)
+            if (matKhau == "Nhập mật khẩu" || string.IsNullOrEmpty(matKhau))
             {
-                // Catch any exceptions and show an error message
-                MessageBox.Show("Đã xảy ra lỗi khi đăng nhập: " + ex.Message, "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Vui lòng nhập mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtMatKhau.Focus();
+                return;
+            }
+
+            // Kiểm tra đăng nhập (Thay thế bằng truy vấn CSDL thực tế)
+            if (tenTaiKhoan == "admin" && matKhau == "123")
+            {
+                username = tenTaiKhoan; // Lưu tài khoản đăng nhập
+                Console.WriteLine("uẻname ne hihi:",username);
+                MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                this.Hide();
+                using (FormMain mainForm = new FormMain())
+                {
+                    mainForm.ShowDialog();
+                }
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Tên tài khoản hoặc mật khẩu không đúng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void txtMatKhau_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void txtDangNhap_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
         
         private void pictureBox4_Click(object sender, EventArgs e)
         {// Đổi trạng thái hiển thị mật khẩu
             isPasswordVisible = !isPasswordVisible;
 
-            if (isPasswordVisible)
-            {
-                // Hiện mật khẩu
-                txtMatKhau.UseSystemPasswordChar = false;
-
-                // Đổi hình ảnh sang mắt mở
-                pictureBox4.Image = Properties.Resources.hidden;
-            }
-            else
-            {
-                // Ẩn mật khẩu
-                txtMatKhau.UseSystemPasswordChar = true;
-
-                // Đổi hình ảnh sang mắt đóng
-                pictureBox4.Image = Properties.Resources.eye;
-            }
+            txtMatKhau.UseSystemPasswordChar = !isPasswordVisible;
+            pictureBox4.Image = isPasswordVisible ? Properties.Resources.hidden : Properties.Resources.eye;
+        
         }
     
 
@@ -138,35 +93,37 @@ namespace QL_CAFE.Views
                 txtTenTaiKhoan.Text = "";
                 txtTenTaiKhoan.ForeColor = Color.Black;
             }
-               
+
         }
 
         private void txtMatKhau_MouseClick(object sender, MouseEventArgs e)
         {
+            if (txtMatKhau.Text == "Nhập mật khẩu")
             {
                 txtMatKhau.Text = "";
                 txtMatKhau.ForeColor = Color.Black;
-
+                txtMatKhau.UseSystemPasswordChar = !isPasswordVisible;
             }
-                
+
         }
 
         private void txtMatKhau_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMatKhau.Text))
+            if (string.IsNullOrWhiteSpace(txtMatKhau.Text))
             {
-                txtMatKhau.ForeColor = Color.LightGray;
-                txtMatKhau.Text = "Nhập mật khẩu";  // Giá trị mặc định
-                
+                txtMatKhau.ForeColor = Color.Gray;
+                txtMatKhau.Text = "Nhập mật khẩu";
+                txtMatKhau.UseSystemPasswordChar = false;
             }
+            
         }
 
         private void txtTenTaiKhoan_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTenTaiKhoan.Text))
+            if (string.IsNullOrWhiteSpace(txtTenTaiKhoan.Text))
             {
-                txtTenTaiKhoan.ForeColor = Color.LightGray;
-                txtTenTaiKhoan.Text = "Nhập tên tài khoản";  // Giá trị mặc định
+                txtTenTaiKhoan.ForeColor = Color.Gray;
+                txtTenTaiKhoan.Text = "Nhập tên tài khoản";
             }
 
         }

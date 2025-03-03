@@ -3,14 +3,12 @@ use quanly_quancafe;
 go
  drop database quanly_quancafe;
 
-CREATE TABLE NguoiDung (
-    HoTen NVARCHAR(300),
-    SoDienThoai CHAR(10),   
-    Email NVARCHAR(200),   
+CREATE TABLE NguoiDung ( 
     TenTK VARCHAR(100) PRIMARY KEY,       -- Tên tài khoản (khóa chính)
     MatKhau NVARCHAR(300) NOT NULL,       -- Mật khẩu đã được mã hóa
     VaiTro NVARCHAR(20) NOT NULL CHECK (VaiTro IN ('Admin', 'User')) -- Vai trò: Admin hoặc User
 );
+select * from nguoidung
 
 -- Bảng nhân viên
 CREATE TABLE NhanVien (
@@ -29,6 +27,11 @@ CREATE TABLE DanhMuc (
     TenDanhMuc NVARCHAR(100) NOT NULL
 );
 
+-- Bảng khu vực
+CREATE TABLE KhuVuc (
+    KhuVucID INT PRIMARY KEY IDENTITY(1,1),
+    TenKhuVuc NVARCHAR(50) NOT NULL
+);
 -- Bảng đồ ăn uống
 CREATE TABLE DoAnUong (
     DoAnUongID INT PRIMARY KEY IDENTITY(1,1),
@@ -38,11 +41,7 @@ CREATE TABLE DoAnUong (
     FOREIGN KEY (DanhMucID) REFERENCES DanhMuc(DanhMucID)
 );
 
--- Bảng khu vực
-CREATE TABLE KhuVuc (
-    KhuVucID INT PRIMARY KEY IDENTITY(1,1),
-    TenKhuVuc NVARCHAR(50) NOT NULL
-);
+
 
 -- Bảng bàn
 CREATE TABLE Ban (
@@ -65,7 +64,6 @@ CREATE TABLE HoaDon (
     FOREIGN KEY (BanID) REFERENCES Ban(BanID)   -- Tham chiếu đến bảng Ban
 );
 
-
 -- Bảng chi tiết hóa đơn
 CREATE TABLE ChiTietHoaDon (
     ChiTietID INT PRIMARY KEY IDENTITY(1,1),
@@ -76,6 +74,95 @@ CREATE TABLE ChiTietHoaDon (
     FOREIGN KEY (HoaDonID) REFERENCES HoaDon(HoaDonID),
     FOREIGN KEY (DoAnUongID) REFERENCES DoAnUong(DoAnUongID)
 );
+
+
+
+-- Trigger xóa chi tiết hóa đơn và cập nhật trạng thái bàn
+ALTER TRIGGER trg_XoaMonAn
+ON ChiTietHoaDon
+AFTER DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Xóa hóa đơn nếu không còn món ăn nào trong chi tiết hóa đơn
+    DELETE FROM HoaDon
+    WHERE HoaDonID IN (
+        SELECT d.HoaDonID
+        FROM HoaDon d
+        LEFT JOIN ChiTietHoaDon c ON d.HoaDonID = c.HoaDonID
+        WHERE c.HoaDonID IS NULL
+    );
+END;
+
+
+
+
+select * from ban
+select * from HoaDon
+select * from ChiTietHoaDon
+delete from ChiTietHoaDon
+
+
+ALTER TABLE HoaDon
+ALTER COLUMN TongTien DECIMAL(10, 2) NULL;
+
+
+CREATE TRIGGER trg_UpdateTongTien
+ON ChiTietHoaDon
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Cập nhật tổng tiền cho hóa đơn có thay đổi trong chi tiết hóa đơn (INSERTED)
+    IF EXISTS (SELECT * FROM inserted)
+    BEGIN
+        UPDATE HoaDon
+        SET TongTien = (
+            SELECT COALESCE(SUM(SoLuong * Gia), 0)
+            FROM ChiTietHoaDon
+            WHERE HoaDonID = i.HoaDonID
+        )
+        FROM inserted i
+        WHERE HoaDon.HoaDonID = i.HoaDonID;
+    END
+
+    -- Cập nhật tổng tiền cho hóa đơn có thay đổi trong chi tiết hóa đơn (DELETED)
+    IF EXISTS (SELECT * FROM deleted)
+    BEGIN
+        UPDATE HoaDon
+        SET TongTien = (
+            SELECT COALESCE(SUM(SoLuong * Gia), 0)
+            FROM ChiTietHoaDon
+            WHERE HoaDonID = d.HoaDonID
+        )
+        FROM deleted d
+        WHERE HoaDon.HoaDonID = d.HoaDonID;
+    END
+END
+
+
+CREATE TABLE [dbo].[tbStore](
+	[id] [bigint] NOT NULL,
+	[nameStore] [nvarchar](500) NULL,
+	[addressStore] [nvarchar](500) NULL,
+	[phoneStore] [nvarchar](500) NULL,
+	[taxCode] [nvarchar](250) NULL,
+ CONSTRAINT [PK_tbStore] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+INSERT [dbo].[tbStore] ([id], [nameStore], [addressStore], [phoneStore], [taxCode]) VALUES (202109221152128393, N'Quán cafe Tuấn Anh', N'Không rõ địa chỉ', N'0944369698', N'000000000000')
+/****** Object:  Table [dbo].[tbProduct]    Script Date: 01/19/2022 00:01:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
 
 -- Thêm dữ liệu vào bảng NguoiDung (Người dùng)
 INSERT INTO NguoiDung (HoTen, SoDienThoai, Email, TenTK, MatKhau, VaiTro)
@@ -131,6 +218,8 @@ VALUES
 (1, 3, 1, 25000),  -- 1 phần Bánh mì
 (2, 2, 3, 15000),  -- 3 phần Tea
 (2, 5, 1, 22000);  -- 1 phần Sinrami
+
+
 
 -- Tắt ràng buộc khóa ngoại
 ALTER TABLE ChiTietHoaDon NOCHECK CONSTRAINT ALL;

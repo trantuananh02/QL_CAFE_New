@@ -11,8 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
-
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 
 namespace QL_CAFE
 {
@@ -38,36 +38,31 @@ namespace QL_CAFE
                 tblNhanVien.Rows.Clear();
 
                 // Lặp qua danh sách nhân viên và thêm vào DataGridView
-                for (int i = 0; i < dsnv.Count; i++)
+                foreach (var nv in dsnv)
                 {
-                    NhanVienModel nv = dsnv[i];
                     string maNhanVien = nv.NhanVienID;
                     string hoTen = nv.HoTen;
-                    string ngaySinh = nv.NgaySinh.ToShortDateString(); // Hiển thị chỉ ngày
+                    string ngaySinh = nv.NgaySinh.HasValue ? nv.NgaySinh.Value.ToShortDateString() : ""; // Kiểm tra null
                     string soDienThoai = nv.SoDienThoai;
                     string diaChi = nv.DiaChi;
                     string tenTaiKhoan = nv.TenTK;
-                    string matKhau = nv.MatKhau;  // Mật khẩu
-                    string vaiTro = nv.VaiTro;    // Vai trò
 
                     // Thêm dòng vào DataGridView
                     tblNhanVien.Rows.Add(
-                        i + 1, // Số thứ tự
+                        tblNhanVien.Rows.Count + 1, // Số thứ tự tự động tăng
                         maNhanVien,
                         hoTen,
-                        ngaySinh, // Chỉ hiển thị ngày
+                        ngaySinh, // Hiển thị ngày nếu có
                         soDienThoai,
                         diaChi,
-                        tenTaiKhoan,
-                        matKhau,   // Hiển thị mật khẩu
-                        vaiTro     // Hiển thị vai trò
+                        tenTaiKhoan
                     );
                 }
             }
             catch (Exception ex)
             {
                 // Hiển thị thông báo lỗi nếu có
-                MessageBox.Show("Lỗi: " + ex.Message);
+                MessageBox.Show("Lỗi: " + ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -145,26 +140,6 @@ namespace QL_CAFE
             };
             tblNhanVien.Columns.Add(colTenTaiKhoan);
 
-            // Cột Mật khẩu
-            DataGridViewTextBoxColumn colMatKhau = new DataGridViewTextBoxColumn
-            {
-                HeaderText = "Mật Khẩu",
-                Name = "MatKhau",
-                ReadOnly = false,
-                Width = 150
-            };
-            tblNhanVien.Columns.Add(colMatKhau);
-
-            // Cột Vai trò
-            DataGridViewTextBoxColumn colVaiTro = new DataGridViewTextBoxColumn
-            {
-                HeaderText = "Vai Trò",
-                Name = "VaiTro",
-                ReadOnly = false,
-                Width = 150
-            };
-            tblNhanVien.Columns.Add(colVaiTro);
-
             // Thiết lập DataGridView
             tblNhanVien.AllowUserToAddRows = false;  // Không cho phép thêm dòng mới khi không có dữ liệu
             tblNhanVien.AllowUserToDeleteRows = false; // Không cho phép xóa dòng
@@ -233,8 +208,6 @@ namespace QL_CAFE
                     string soDienThoai = dgvRow.Cells[4].Value?.ToString();
                     string diaChi = dgvRow.Cells[5].Value?.ToString();
                     string tenTK = dgvRow.Cells[6].Value?.ToString();
-                    string matKhau = dgvRow.Cells[7].Value?.ToString();
-                    string vaiTro = dgvRow.Cells[8].Value?.ToString();
 
                     // Kiểm tra dữ liệu nhập
                     if (string.IsNullOrWhiteSpace(nhanVienID))
@@ -254,9 +227,7 @@ namespace QL_CAFE
                         NgaySinh = ngaySinh,
                         SoDienThoai = soDienThoai,
                         DiaChi = diaChi,
-                        TenTK = tenTK,
-                        MatKhau = matKhau,
-                        VaiTro = vaiTro
+                        TenTK = tenTK
                     };
 
                     bool result;
@@ -282,7 +253,7 @@ namespace QL_CAFE
                 // Hiển thị thông báo thành công nếu mọi thứ đều thành công
                 if (isSuccess)
                 {
-                    MessageBox.Show("Lưu dữ liệu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Đã cập nhật dữ liệu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
@@ -344,88 +315,96 @@ namespace QL_CAFE
             }
         }
 
+        // xuất excel
+
         private void pictureBox5_Click(object sender, EventArgs e)
         {
-
-            try
-    {
-        bool isSuccess = true;
-        NhanVienController nhanVienController = new NhanVienController();
-
-        // Commit any changes made in the DataGridView
-        tblNhanVien.EndEdit();
-
-        for (int row = 0; row < tblNhanVien.Rows.Count; row++)
-        {
-            DataGridViewRow dgvRow = tblNhanVien.Rows[row];
-
-            // Extract values from the current row
-            string nhanVienID = dgvRow.Cells[1].Value?.ToString();
-            string hoTen = dgvRow.Cells[2].Value?.ToString();
-            DateTime ngaySinh = dgvRow.Cells[3].Value != null ? Convert.ToDateTime(dgvRow.Cells["NgaySinh"].Value) : DateTime.MinValue;
-            string soDienThoai = dgvRow.Cells[4].Value?.ToString();
-            string diaChi = dgvRow.Cells[5].Value?.ToString();
-            string tenTK = dgvRow.Cells[6].Value?.ToString();
-            string matKhau = dgvRow.Cells[7].Value?.ToString();
-            string vaiTro = dgvRow.Cells[8].Value?.ToString();
-
-            // Check for missing employee ID
-            if (string.IsNullOrWhiteSpace(nhanVienID))
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
-                MessageBox.Show($"Mã nhân viên không được để trống tại dòng {row + 1}", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                saveFileDialog.Title = "Chọn nơi lưu file Excel";
+                saveFileDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+
+                    try
+                    {
+                        OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
+                        using (var package = new OfficeOpenXml.ExcelPackage())
+                        {
+                            var sheet = package.Workbook.Worksheets.Add("Danh sách nhân viên");
+
+                            // Tạo tiêu đề
+                            sheet.Cells["A1:G1"].Merge = true; // Gộp các ô từ A1 đến G1
+                            sheet.Cells["A1"].Value = "DANH SÁCH NHÂN VIÊN";
+                            sheet.Cells["A1"].Style.Font.Size = 16;
+                            sheet.Cells["A1"].Style.Font.Bold = true;
+                            sheet.Cells["A1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+
+                            // Tạo header
+                            string[] headers = { "Số TT", "Mã Nhân Viên", "Họ và Tên", "Ngày Sinh", "Số Điện Thoại", "Địa Chỉ", "Tên Tài Khoản" };
+                            for (int i = 0; i < headers.Length; i++)
+                            {
+                                var headerCell = sheet.Cells[2, i + 1];
+                                headerCell.Value = headers[i];
+                                headerCell.Style.Font.Bold = true;
+                                headerCell.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                                headerCell.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightBlue);
+                                headerCell.Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                                headerCell.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                            }
+
+                            // Ghi dữ liệu từ DataGridView vào Excel
+                            for (int row = 0; row < tblNhanVien.RowCount; row++)
+                            {
+                                for (int col = 0; col < tblNhanVien.ColumnCount; col++)
+                                {
+                                    var cell = tblNhanVien.Rows[row].Cells[col].Value;
+                                    var excelCell = sheet.Cells[row + 3, col + 1]; // Bắt đầu từ hàng thứ 3
+                                    excelCell.Value = cell != null ? cell.ToString() : "";
+                                    excelCell.Style.Border.BorderAround(OfficeOpenXml.Style.ExcelBorderStyle.Thin);
+                                }
+                            }
+
+                            // Tự động căn chỉnh cột
+                            sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
+
+                            // Lưu file Excel
+                            package.SaveAs(new FileInfo(filePath));
+                        }
+
+                        MessageBox.Show("Xuất file Excel thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Mở file Excel vừa tạo
+                        if (File.Exists(filePath))
+                        {
+                            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                            {
+                                FileName = filePath,
+                                UseShellExecute = true
+                            });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Lỗi khi xuất file: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
 
-            // Check if employee already exists
-            bool nhanVienExist = nhanVienController.KiemTraNhanVienExist(nhanVienID);
 
-            NhanVienModel nhanVienModel = new NhanVienModel
-            {
-                NhanVienID = nhanVienID,
-                HoTen = hoTen,
-                NgaySinh = ngaySinh,
-                SoDienThoai = soDienThoai,
-                DiaChi = diaChi,
-                TenTK = tenTK,
-                MatKhau = matKhau,
-                VaiTro = vaiTro
-            };
-
-            bool result;
-
-            if (!nhanVienExist) // If employee does not exist, call method to add
-            {
-                result = nhanVienController.ThemNhanVien(nhanVienModel);
-            }
-            else // If employee exists, call method to update
-            {
-                result = nhanVienController.LuuNhanVien(nhanVienModel);
-            }
-
-            // If saving fails, stop and show error
-            if (!result)
-            {
-                isSuccess = false;
-                MessageBox.Show($"Có lỗi xảy ra khi lưu nhân viên tại dòng {row + 1}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                break;
-            }
-        }
-
-        // Show success message
-        if (isSuccess)
-        {
-            MessageBox.Show("Lưu dữ liệu thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-    }
-    catch (Exception ex)
-    {
-        MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    }
         }
 
         private void pictureBox7_Click(object sender, EventArgs e)
         {
             HienThiDanhSachNhanVien();
+        }
+
+        private void tblNhanVien_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

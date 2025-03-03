@@ -16,7 +16,7 @@ namespace QL_CAFE.Controllers
             List<NhanVienModel> danhSachNhanVien = new List<NhanVienModel>();
 
             // Câu lệnh SQL để lấy danh sách nhân viên
-            string sql = "SELECT NhanVienID, HoTen, NgaySinh, SoDienThoai, DiaChi, TenTK, MatKhau, VaiTro FROM NhanVien";
+            string sql = "SELECT NhanVienID, HoTen, NgaySinh, SoDienThoai, DiaChi, TenTK FROM NhanVien";
 
             try
             {
@@ -38,9 +38,7 @@ namespace QL_CAFE.Controllers
                         NgaySinh = reader.GetDateTime(reader.GetOrdinal("NgaySinh")).Date,
                         SoDienThoai = reader.GetString(reader.GetOrdinal("SoDienThoai")),
                         DiaChi = reader.GetString(reader.GetOrdinal("DiaChi")),
-                        TenTK = reader.GetString(reader.GetOrdinal("TenTK")),
-                        MatKhau = reader.GetString(reader.GetOrdinal("MatKhau")),
-                        VaiTro = reader.GetString(reader.GetOrdinal("VaiTro"))
+                        TenTK = reader.GetString(reader.GetOrdinal("TenTK"))
                     };
 
                     danhSachNhanVien.Add(nhanVien);
@@ -78,37 +76,64 @@ namespace QL_CAFE.Controllers
         }
         public bool ThemNhanVien(NhanVienModel nhanVien)
         {
-            // Câu lệnh SQL để thêm nhân viên
-            string sql = "INSERT INTO NHANVIEN (NhanVienID, HoTen, NgaySinh, SoDienThoai, DiaChi, TenTK, MatKhau, Vaitro) " +
-                         "VALUES (@NhanVienID, @HoTen, @NgaySinh, @SoDienThoai, @DiaChi, @TenTK, @MatKhau, @VaiTro)";
+            string sqlNguoiDung = "INSERT INTO NguoiDung (TenTK, MatKhau, VaiTro) VALUES (@TenTK, @MatKhau, @VaiTro)";
+            string sqlNhanVien = "INSERT INTO NhanVien (NhanVienID, HoTen, NgaySinh, SoDienThoai, DiaChi, TenTK) " +
+                                 "VALUES (@NhanVienID, @HoTen, @NgaySinh, @SoDienThoai, @DiaChi, @TenTK)";
+
             try
             {
-                using (SqlCommand command = new SqlCommand(sql, conn))
+                if (conn.State == System.Data.ConnectionState.Closed)
                 {
-                    // Gắn giá trị từ model vào các tham số
-                    command.Parameters.AddWithValue("@NhanVienID", nhanVien.NhanVienID);
-                    command.Parameters.AddWithValue("@HoTen", nhanVien.HoTen);
-                    command.Parameters.AddWithValue("@NgaySinh", nhanVien.NgaySinh != DateTime.MinValue ? (object)nhanVien.NgaySinh : DBNull.Value);
-                    command.Parameters.AddWithValue("@SoDienThoai", nhanVien.SoDienThoai);
-                    command.Parameters.AddWithValue("@DiaChi", nhanVien.DiaChi);
-                    command.Parameters.AddWithValue("@TenTK", nhanVien.TenTK);
-                    command.Parameters.AddWithValue("@MatKhau", nhanVien.MatKhau); // Gắn mật khẩu
-                    command.Parameters.AddWithValue("@VaiTro", nhanVien.VaiTro); // Gắn vai trò
+                    conn.Open();
+                }
 
-                    // Thực thi câu lệnh
-                    int rowsAffected = command.ExecuteNonQuery();
+                using (SqlTransaction transaction = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1. Thêm tài khoản người dùng
+                        using (SqlCommand cmdNguoiDung = new SqlCommand(sqlNguoiDung, conn, transaction))
+                        {
+                            cmdNguoiDung.Parameters.AddWithValue("@TenTK", nhanVien.TenTK);
+                            cmdNguoiDung.Parameters.AddWithValue("@MatKhau", "1"); // Mật khẩu mặc định
+                            cmdNguoiDung.Parameters.AddWithValue("@VaiTro", "User"); // Mặc định là User
 
-                    // Kiểm tra nếu có ít nhất 1 hàng được thêm
-                    return rowsAffected > 0;
+                            cmdNguoiDung.ExecuteNonQuery();
+                        }
+
+                        // 2. Thêm nhân viên
+                        using (SqlCommand cmdNhanVien = new SqlCommand(sqlNhanVien, conn, transaction))
+                        {
+                            cmdNhanVien.Parameters.AddWithValue("@NhanVienID", nhanVien.NhanVienID);
+                            cmdNhanVien.Parameters.AddWithValue("@HoTen", nhanVien.HoTen);
+                            cmdNhanVien.Parameters.AddWithValue("@NgaySinh", nhanVien.NgaySinh != DateTime.MinValue ? (object)nhanVien.NgaySinh : DBNull.Value);
+                            cmdNhanVien.Parameters.AddWithValue("@SoDienThoai", nhanVien.SoDienThoai);
+                            cmdNhanVien.Parameters.AddWithValue("@DiaChi", nhanVien.DiaChi);
+                            cmdNhanVien.Parameters.AddWithValue("@TenTK", nhanVien.TenTK);
+
+                            cmdNhanVien.ExecuteNonQuery();
+                        }
+
+                        // Nếu cả 2 lệnh thực hiện thành công, commit transaction
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Nếu có lỗi, rollback để tránh dữ liệu bị lỗi
+                        transaction.Rollback();
+                        Console.WriteLine("Lỗi khi thêm nhân viên: " + ex.Message);
+                        return false;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                // Log lỗi (nếu cần thiết)
-                Console.WriteLine("Lỗi khi thêm nhân viên: " + ex.Message);
+                Console.WriteLine("Lỗi kết nối: " + ex.Message);
                 return false;
             }
         }
+
         public bool Xoa(string nhanVienID)
         {
             try
@@ -134,7 +159,7 @@ namespace QL_CAFE.Controllers
             // Câu lệnh SQL để cập nhật thông tin nhân viên
             string sql = "UPDATE NHANVIEN " +
                          "SET HoTen = @HoTen, NgaySinh = @NgaySinh, SoDienThoai = @SoDienThoai, DiaChi = @DiaChi, " +
-                         "TenTK = @TenTK, MatKhau = @MatKhau, VaiTro = @VaiTro " + // Updated to include MatKhau and VaiTro
+                         "TenTK = @TenTK " + // Updated to include MatKhau and VaiTro
                          "WHERE NhanVienID = @NhanVienID";
             try
             {
@@ -146,8 +171,6 @@ namespace QL_CAFE.Controllers
                     command.Parameters.Add("@SoDienThoai", System.Data.SqlDbType.NVarChar).Value = nhanVien.SoDienThoai;
                     command.Parameters.Add("@DiaChi", System.Data.SqlDbType.NVarChar).Value = nhanVien.DiaChi;
                     command.Parameters.Add("@TenTK", System.Data.SqlDbType.NVarChar).Value = nhanVien.TenTK;
-                    command.Parameters.Add("@MatKhau", System.Data.SqlDbType.NVarChar).Value = nhanVien.MatKhau; // Added MatKhau
-                    command.Parameters.Add("@VaiTro", System.Data.SqlDbType.NVarChar).Value = nhanVien.VaiTro; // Added VaiTro
                     command.Parameters.Add("@NhanVienID", System.Data.SqlDbType.NVarChar).Value = nhanVien.NhanVienID;
 
                     // Thực thi câu lệnh

@@ -56,7 +56,6 @@ namespace QL_CAFE.Views
             }
         }
 
-
         // Khởi tạo bảng danh mục
         private void KhoiTaoBangDanhMuc()
         {
@@ -87,7 +86,7 @@ namespace QL_CAFE.Views
                 HeaderText = "Tên Danh Mục",
                 Name = "TenDanhMuc",
                 ReadOnly = false,
-                Width = 250
+                Width = 370
             });
 
             tblDanhMuc.AllowUserToAddRows = false;
@@ -225,9 +224,9 @@ namespace QL_CAFE.Views
 
             tblMonTheoDanhMuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Số TT", Name = "STT", ReadOnly = true, Width = 100 });
             tblMonTheoDanhMuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Mã Đồ Ăn/Uống", Name = "DoAnUongID", ReadOnly = false, Width = 150 });
-            tblMonTheoDanhMuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Tên Đồ Ăn/Uống", Name = "TenDoAnUong", ReadOnly = false, Width = 150 });
+            tblMonTheoDanhMuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Tên Đồ Ăn/Uống", Name = "TenDoAnUong", ReadOnly = false, Width = 180 });
             tblMonTheoDanhMuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Giá", Name = "Gia", ReadOnly = false, Width = 150 });
-            tblMonTheoDanhMuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Mã Danh Mục", Name = "DanhMucID", ReadOnly = false, Width = 150 });
+            tblMonTheoDanhMuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Mã Danh Mục", Name = "DanhMucID", ReadOnly = false, Width = 200 });
 
             tblMonTheoDanhMuc.AllowUserToAddRows = false;
             tblMonTheoDanhMuc.AllowUserToDeleteRows = false;

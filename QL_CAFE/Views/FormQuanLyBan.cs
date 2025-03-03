@@ -58,8 +58,8 @@ namespace QL_CAFE.Views
             tblKhuVuc.Rows.Clear();
 
             tblKhuVuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Số TT", Name = "STT", ReadOnly = true, Width = 100 });
-            tblKhuVuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Mã Khu Vực", Name = "MaKhuVuc", ReadOnly = false, Width = 150 });
-            tblKhuVuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Tên Khu Vực", Name = "TenKhuVuc", ReadOnly = false, Width = 250 });
+            tblKhuVuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Mã Khu Vực", Name = "MaKhuVuc", ReadOnly = false, Width = 200 });
+            tblKhuVuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Tên Khu Vực", Name = "TenKhuVuc", ReadOnly = false, Width = 350 });
 
             tblKhuVuc.AllowUserToAddRows = false;
             tblKhuVuc.AllowUserToDeleteRows = false;
@@ -205,9 +205,9 @@ namespace QL_CAFE.Views
 
             tblBanTheoKhuVuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Số TT", Name = "STT", ReadOnly = true, Width = 100 });
             tblBanTheoKhuVuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Mã Bàn", Name = "MaBan", ReadOnly = false, Width = 150 });
-            tblBanTheoKhuVuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Tên Bàn", Name = "TenBan", ReadOnly = false, Width = 150 });
+            tblBanTheoKhuVuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Tên Bàn", Name = "TenBan", ReadOnly = false, Width = 180 });
             tblBanTheoKhuVuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Trạng Thái", Name = "TrangThai", ReadOnly = false, Width = 150 });
-            tblBanTheoKhuVuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Mã Khu Vực", Name = "MaKhuVuc", ReadOnly = false, Width = 150 });
+            tblBanTheoKhuVuc.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Mã Khu Vực", Name = "MaKhuVuc", ReadOnly = false, Width = 220 });
 
             tblBanTheoKhuVuc.AllowUserToAddRows = false;
             tblBanTheoKhuVuc.AllowUserToDeleteRows = false;

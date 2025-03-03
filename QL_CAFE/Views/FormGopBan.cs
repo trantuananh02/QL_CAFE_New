@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -138,6 +139,7 @@ namespace QL_CAFE.Views
                 {
                     // Lưu BanID vào biến selectedBanID
                     selectedBanID2 = ban.BanID; // Giả sử BanModel có thuộc tính BanID
+                    Console.WriteLine("Bàn nè ae:" + selectedBanID2);
                     lblRight.Text = ban.SoBan.ToString(); // Hiển thị thông tin bàn trong Label
                 };
 
@@ -180,7 +182,33 @@ namespace QL_CAFE.Views
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                if (selectedBanID == 0 || selectedBanID2 == 0)
+                {
+                    MessageBox.Show("Vui lòng chọn hai bàn để gộp!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                QuanLyBanController controller = new QuanLyBanController();
+                controller.GopBan(selectedBanID, selectedBanID2);
+
+                HienThiBanCoNguoi();
+                HienThiBanTheoDanhSach(dsBan);
+
+                // Lấy FormMain từ danh sách các form đang mở
+                FormMain formMain = Application.OpenForms["FormMain"] as FormMain;
+                if (formMain != null)
+                {
+                    formMain.HienThiBan();
+                    formMain.HienThiChiTietHoaDonTheoBan();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Đã xảy ra lỗi khi gộp bàn: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -10,6 +10,7 @@ namespace QL_CAFE.Models
     {
         public int HoaDonID { get; set; }  // ID hóa đơn
         public DateTime NgayTao { get; set; }  // Ngày tạo hóa đơn
+        public DateTime? NgayThanhToan { get; set; }  // Ngày thanh toán hóa đơn (nullable)
         public decimal TongTien { get; set; }  // Tổng tiền của hóa đơn
         public string NhanVienID { get; set; }  // Mã nhân viên
         public int BanID { get; set; }  // ID bàn
@@ -24,4 +25,5 @@ namespace QL_CAFE.Models
             TrangThai = "Chưa Thanh Toán";  // Giá trị mặc định cho trạng thái
         }
     }
+
 }

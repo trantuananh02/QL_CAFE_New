@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Security.Cryptography;
@@ -29,6 +31,8 @@ namespace QL_CAFE.Views
         private ToolStripMenuItem menuItemXoa;
         private string tenMonDuocChon;
         private decimal giaMonDuocChon; // Giá của món được chọn
+        private string hoaDonContent = string.Empty;
+
         public FormMain()
         {
             InitializeComponent();
@@ -46,6 +50,7 @@ namespace QL_CAFE.Views
 
             // Gán ContextMenuStrip cho DataGridView
             dtgvDoDaChon.ContextMenuStrip = contextMenu;
+
             HienThiKhuVuc();
             HienThiDanhMuc(); // Gọi hàm hiển thị danh mục
             HienThiBan(); // Gọi hàm hiển thị bàn
@@ -246,53 +251,49 @@ namespace QL_CAFE.Views
 
                 cbKhuVuc.Items.Clear();
 
+                // Thêm mục "Tất cả" đầu tiên
+                cbKhuVuc.Items.Add("Tất cả");
+
                 // Duyệt qua danh sách khu vực và thêm tên vào ComboBox
                 foreach (KhuVucModel khuvuc in dskv)
                 {
-                    cbKhuVuc.Items.Add(khuvuc.TenKhuVuc); // Chỉ hiển thị tên khu vực
+                    cbKhuVuc.Items.Add(khuvuc.TenKhuVuc);
                 }
 
-                // Nếu cần, chọn mục đầu tiên làm mặc định
-                if (cbKhuVuc.Items.Count > 0)
-                {
-                    cbKhuVuc.SelectedIndex = 0;
-                }
+                // Chọn "Tất cả" làm mặc định
+                cbKhuVuc.SelectedIndex = 0;
             }
+           
+
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
 
-        public  void HienThiDanhMuc()
+        public void HienThiDanhMuc()
         {
             try
             {
                 DanhMucController controllerdm = new DanhMucController();
                 List<DanhMucModel> danhMucList = controllerdm.HienThiDanhSachDanhMuc();
 
-                dsDanhMuc.Clear(); // Làm sạch danh sách trước khi thêm
+                dsDanhMuc.Clear(); // Xóa danh sách trước khi thêm mới
 
-                // Duyệt qua danh sách danh mục và thêm tên vào List<string>
+                cbDanhMucDo.Items.Clear(); // Xóa dữ liệu cũ trong ComboBox
+
+                // Thêm mục "Tất cả" vào đầu danh sách
+                cbDanhMucDo.Items.Add("Tất cả");
+
+                // Duyệt qua danh sách danh mục và thêm vào List & ComboBox
                 foreach (DanhMucModel danhMuc in danhMucList)
                 {
-                    dsDanhMuc.Add(danhMuc.TenDanhMuc); // Chỉ thêm tên danh mục vào dsDanhMuc
+                    dsDanhMuc.Add(danhMuc.TenDanhMuc);
+                    cbDanhMucDo.Items.Add(danhMuc.TenDanhMuc);
                 }
 
-                // Làm mới ComboBox (giả sử bạn có ComboBox tên cbDanhMuc)
-                cbDanhMucDo.Items.Clear();
-
-                // Thêm dữ liệu vào ComboBox
-                foreach (string tenDanhMuc in dsDanhMuc)
-                {
-                    cbDanhMucDo.Items.Add(tenDanhMuc);
-                }
-
-                // Chọn mục đầu tiên nếu có
-                if (cbDanhMucDo.Items.Count > 0)
-                {
-                    cbDanhMucDo.SelectedIndex = 0;
-                }
+                // Chọn "Tất cả" làm mặc định
+                cbDanhMucDo.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -300,8 +301,9 @@ namespace QL_CAFE.Views
             }
         }
 
+
         // Biến toàn cục lưu BanID khi click vào bàn
-       
+
         public void HienThiBan()
         {
             try
@@ -389,18 +391,25 @@ namespace QL_CAFE.Views
         {
             try
             {
-                // Lấy khu vực được chọn
-                int selectedIndex = cbKhuVuc.SelectedIndex;
-                if (selectedIndex >= 0 && selectedIndex < dskv.Count)
+                if (cbKhuVuc.SelectedItem.ToString() == "Tất cả")
                 {
-                    int khuVucID = dskv[selectedIndex].KhuVucID; // Lấy ID của khu vực
+                    HienThiBan();
+                }
+                else
+                {
+                    // Lấy khu vực được chọn
+                    int selectedIndex = cbKhuVuc.SelectedIndex - 1; // Trừ 1 vì "Tất cả" là index 0
+                    if (selectedIndex >= 0 && selectedIndex < dskv.Count)
+                    {
+                        int khuVucID = dskv[selectedIndex].KhuVucID; // Lấy ID của khu vực
 
-                    // Gọi controller để lấy danh sách bàn theo khu vực ID
-                    QuanLyBanController controllerBan = new QuanLyBanController();
-                    List<BanModel> danhSachBanTheoKhuVuc = controllerBan.HienThiDanhSachBanTheoKhuVuc(khuVucID);
+                        // Gọi controller để lấy danh sách bàn theo khu vực ID
+                        QuanLyBanController controllerBan = new QuanLyBanController();
+                        List<BanModel> danhSachBanTheoKhuVuc = controllerBan.HienThiDanhSachBanTheoKhuVuc(khuVucID);
 
-                    // Hiển thị danh sách bàn
-                    HienThiBanTheoDanhSach(danhSachBanTheoKhuVuc);
+                        // Hiển thị danh sách bàn theo khu vực
+                        HienThiBanTheoDanhSach(danhSachBanTheoKhuVuc);
+                    }
                 }
             }
             catch (Exception ex)
@@ -466,16 +475,25 @@ namespace QL_CAFE.Views
         {
             try
             {
-                // Lấy DanhMucID của danh mục được chọn từ danh sách dsDanhMuc
                 string selectedCategory = cbDanhMucDo.SelectedItem.ToString();
-                int danhMucID = dsDanhMuc.IndexOf(selectedCategory) + 1; // Giả sử DanhMucID là chỉ số (1-based)
 
-                // Gọi controller để lấy danh sách đồ ăn uống theo DanhMucID
                 DoAnUongController controllerDoAn = new DoAnUongController();
-                List<DoAnUongModel> dsDoAnTheoDanhMuc = controllerDoAn.HienThiDanhSachDoAnUongTheoDanhMuc(danhMucID);
 
-                // Hiển thị danh sách đồ ăn uống tương ứng
-                HienThiDoAnUongTheoDanhMuc(dsDoAnTheoDanhMuc);
+                if (selectedCategory == "Tất cả")
+                {
+                    HienThiDoAnUong();
+                }
+                else
+                {
+                    // Tìm ID của danh mục (trừ 1 vì "Tất cả" là mục đầu tiên)
+                    int danhMucID = dsDanhMuc.IndexOf(selectedCategory) + 1;
+
+                    // Gọi controller để lấy danh sách đồ ăn uống theo DanhMucID
+                    List<DoAnUongModel> dsDoAnTheoDanhMuc = controllerDoAn.HienThiDanhSachDoAnUongTheoDanhMuc(danhMucID);
+
+                    // Hiển thị danh sách đồ ăn uống theo danh mục đã chọn
+                    HienThiDoAnUongTheoDanhMuc(dsDoAnTheoDanhMuc);
+                }
             }
             catch (Exception ex)
             {
@@ -612,7 +630,42 @@ namespace QL_CAFE.Views
                     return;
                 }
 
-                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn thanh toán bàn này?", "Xác nhận thanh toán", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                // Kiểm tra nếu txtKhachTra rỗng
+                if (string.IsNullOrWhiteSpace(txtKhachTra.Text))
+                {
+                    MessageBox.Show("Vui lòng nhập số tiền khách trả trước khi thanh toán.");
+                    return;
+                }
+
+                // Kiểm tra nếu txtKhachTra không phải số hợp lệ
+                if (!decimal.TryParse(txtKhachTra.Text, out decimal khachTra) || khachTra <= 0)
+                {
+                    MessageBox.Show("Số tiền khách trả không hợp lệ. Vui lòng nhập lại.");
+                    return;
+                }
+
+                // Lấy tổng tiền từ labTongTien (giả sử labTongTien.Text chứa số tiền)
+                if (!decimal.TryParse(labTongTien.Text, out decimal tongTien))
+                {
+                    MessageBox.Show("Bàn này chưa gọi món.");
+                    return;
+                }
+
+                // Tính tiền thừa
+                decimal tienThua = khachTra - tongTien;
+                labTienThua.Text = tienThua.ToString("N0");
+
+                // Nếu tiền thừa âm, tức khách trả thiếu tiền
+                if (tienThua < 0)
+                {
+                    MessageBox.Show("Khách trả thiếu tiền. Vui lòng nhập đủ số tiền.");
+                    return;
+                }
+
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn thanh toán bàn này?",
+                                                       "Xác nhận thanh toán",
+                                                       MessageBoxButtons.YesNo,
+                                                       MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
@@ -623,17 +676,37 @@ namespace QL_CAFE.Views
 
                     if (hoaDonID > 0)
                     {
+                        // Hỏi người dùng có muốn in hóa đơn trước không
+                        DialogResult printResult = MessageBox.Show("Bạn có muốn in hóa đơn không?",
+                                                                     "In hóa đơn",
+                                                                     MessageBoxButtons.YesNo,
+                                                                     MessageBoxIcon.Question);
+
+                        if (printResult == DialogResult.Yes)
+                        {
+                            if (!ckbInHoaDon.Checked && !ckbXemTruocHoaDon.Checked)
+                            {
+                                MessageBox.Show("Vui lòng chọn một tùy chọn: In hoặc Xem trước hóa đơn.");
+                                return;
+                            }
+                            else
+                            {
+                                InHoaDon(hoaDonID);
+                            }
+                        }
+
+                        // Tiến hành thanh toán
                         bool isSuccess = hoaDonController.ThanhToanHoaDon(hoaDonID);
 
                         if (isSuccess)
                         {
                             MessageBox.Show("Thanh toán thành công.");
 
-                            // Cập nhật trạng thái bàn
+                            // Cập nhật trạng thái bàn và hiển thị chi tiết hóa đơn
                             HienThiBan();
                             HienThiChiTietHoaDonTheoBan();
 
-                            // Làm trống các giá trị trong labTongTien, txtKhachTra và labTienThua
+                            // Làm trống các giá trị hiển thị
                             labTongTien.Text = "0";
                             txtKhachTra.Text = "";
                             labTienThua.Text = "0";
@@ -655,6 +728,111 @@ namespace QL_CAFE.Views
             }
         }
 
+        private void InHoaDon(int hoaDonID)
+        {
+            try
+            {
+                // Lấy thông tin hóa đơn
+                HoaDonController hoaDonController = new HoaDonController();
+                var hoaDon = hoaDonController.LayHoaDonTheoID(hoaDonID);
+
+                if (hoaDon != null)
+                {
+                    // Lấy chi tiết hóa đơn
+                    ChiTietHoaDonController chiTietHoaDon = new ChiTietHoaDonController();
+                    var chiTiet = chiTietHoaDon.LayChiTietHoaDonByHoaDonID(hoaDonID);
+
+                    // Tạo nội dung hóa đơn
+
+                    hoaDonContent = $" Coffee Xưa\n";
+                    hoaDonContent += $"Địa Chỉ: 120 Tân Mai, Hoàng Mai, Hà Nội\n\n"; 
+                    hoaDonContent += $"HÓA ĐƠN\n";
+                    hoaDonContent += $"ID Hóa Đơn: {hoaDon.HoaDonID}\n";
+                    hoaDonContent += $"Ngày Tạo: {hoaDon.NgayTao}\n";
+                    hoaDonContent += $"Nhân Viên: {hoaDon.NhanVienID}\n";
+                    hoaDonContent += $"Bàn: {hoaDon.BanID}\n\n";
+
+                    hoaDonContent += $"Danh sách món:\n";
+                    hoaDonContent += $"{"Tên Món",-20} {"Số Lượng",-15} {"Đơn Giá (VND)",-20} {"Thành Tiền (VND)",-20}\n";
+                    hoaDonContent += new string('-', 70) + "\n";
+
+                    foreach (var item in chiTiet)
+                    {
+                        decimal thanhTien = item.SoLuong * item.Gia;
+                        hoaDonContent += $"{item.TenDoAnUong,-20} {item.SoLuong,-25} {item.Gia.ToString("N0"),-25} {thanhTien.ToString("N0"),-20}\n";
+                    }
+
+                    hoaDonContent += new string('-', 70) + "\n";
+                    hoaDonContent += $"TỔNG TIỀN: {hoaDon.TongTien.ToString("N0")} VNĐ\n\n";
+                    hoaDonContent += new string('-', 70) + "\n";
+                    hoaDonContent += $" Cảm ơn quý khách!\n";
+
+
+                    // Kiểm tra trạng thái checkbox
+                    if (ckbInHoaDon.Checked)
+                    {
+                        // Hiển thị hộp thoại in
+                        PrintDialog printDialog = new PrintDialog();
+                        if (printDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            printDocument1.Print();
+                        }
+                    }
+                    else if (ckbXemTruocHoaDon.Checked)
+                    {
+                        // Hiển thị xem trước in
+                        PrintPreviewDialog previewDialog = new PrintPreviewDialog();
+                        previewDialog.Document = printDocument1;
+                        previewDialog.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng chọn một tùy chọn: In hoặc Xem trước hóa đơn.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy hóa đơn tương ứng.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi in hóa đơn: " + ex.Message);
+            }
+        }
+
+
+        // Hàm thực thi in trên PrintDocument
+
+
+        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(hoaDonContent))
+            {
+                // Thiết lập font chữ và bố cục
+                Font font = new Font("Arial", 12);
+                float yPos = 100; // Vị trí dòng đầu tiên
+                float leftMargin = e.MarginBounds.Left;
+                float topMargin = e.MarginBounds.Top;
+
+                // Vẽ từng dòng nội dung
+                using (StringReader reader = new StringReader(hoaDonContent))
+                {
+                    string line;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        e.Graphics.DrawString(line, font, Brushes.Black, leftMargin, yPos, new StringFormat());
+                        yPos += font.GetHeight(e.Graphics); // Tăng vị trí Y
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Không có nội dung để in.");
+            }
+        }
+
+
         // tính tiền
         private void HienThiTongTien()
         {
@@ -666,7 +844,7 @@ namespace QL_CAFE.Views
             if (hoaDonID > 0)
             {
                 decimal tongTien = hoaDonController.LayTongTienHoaDon(hoaDonID);
-                labTongTien.Text = tongTien.ToString("N0") + " VND"; // Hiển thị tổng tiền dưới dạng số nguyên với dấu phân cách và đơn vị VND
+                labTongTien.Text = tongTien.ToString("N0") ; // Hiển thị tổng tiền dưới dạng số nguyên với dấu phân cách và đơn vị VND
             }
             else
             {
@@ -680,14 +858,16 @@ namespace QL_CAFE.Views
             decimal tongTien = 0;
             decimal khachTra = 0;
 
-            // Lấy tổng tiền từ labTongTien
-            if (!decimal.TryParse(labTongTien.Text, out tongTien))
+            // Lấy tổng tiền từ labTongTien (loại bỏ " VND" trước khi chuyển đổi)
+            string tongTienText = labTongTien.Text.Replace(" VND", "").Replace(",", "").Trim();
+            if (!decimal.TryParse(tongTienText, out tongTien))
             {
                 tongTien = 0;
             }
 
-            // Lấy tiền khách trả từ txtKhachTra
-            if (!decimal.TryParse(txtKhachTra.Text, out khachTra))
+            // Lấy tiền khách trả từ txtKhachTra (loại bỏ ký tự không hợp lệ nếu cần)
+            string khachTraText = txtKhachTra.Text.Replace(",", "").Trim();
+            if (!decimal.TryParse(khachTraText, out khachTra))
             {
                 khachTra = 0;
             }
@@ -715,6 +895,69 @@ namespace QL_CAFE.Views
 
             // Hiển thị form (dùng ShowDialog nếu muốn modal)
             formGopBan.ShowDialog();
+        }
+
+        private void ckbXemTruocHoaDon_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbXemTruocHoaDon.Checked)
+            {
+                // Bỏ chọn checkbox khác
+                ckbInHoaDon.Checked = false;
+            }
+        }
+
+        private void ckbInHoaDon_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ckbInHoaDon.Checked)
+            {
+                // Bỏ chọn checkbox khác
+                ckbXemTruocHoaDon.Checked = false;
+            }
+        }
+
+        private void thôngTinNgườiDùngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormThongTinNguoiDung formThongTinNguoiDung = new FormThongTinNguoiDung();
+            formThongTinNguoiDung.ShowDialog();
+        }
+
+        private void đổiMậtKhẩuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormQuenMatKhau formQuenMatKhau = new FormQuenMatKhau();
+            formQuenMatKhau.ShowDialog();
+        }
+
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+ 
+           this.Close();
+
+
+            // Tạo và mở lại cửa sổ DangNhap
+            DangNhap formDangNhap = new DangNhap();
+            formDangNhap.Show();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void quảnLýDanhMụcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormQuanLyDoanhThu form = new FormQuanLyDoanhThu();
+            form.ShowDialog();
+        }
+
+        private void ptbLoadBan_Click(object sender, EventArgs e)
+        {
+            HienThiBan(); // Gọi hàm hiển thị bàn
+        }
+
+        private void ptbLoadDo_Click(object sender, EventArgs e)
+        {
+
+            HienThiDoAnUong(); // Gọi hàm hiển thị đồ ăn uống
         }
     }
 }

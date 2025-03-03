@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QL_CAFE.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -221,9 +222,6 @@ namespace QL_CAFE.Controllers
         }
 
 
-
-
-
         public int LayHoaDonIDTheoBan(int banID)
         {
             int hoaDonID = 0;
@@ -246,6 +244,48 @@ namespace QL_CAFE.Controllers
             }
 
             return hoaDonID;
+        }
+
+        
+
+
+        public HoaDonModel LayHoaDonTheoID(int hoaDonID)
+        {
+            HoaDonModel hoaDon = null;
+
+            string query = @"
+        SELECT HoaDonID, BanID, NhanVienID, TongTien, TrangThai, NgayThanhToan
+        FROM HoaDon
+        WHERE HoaDonID = @HoaDonID";
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@HoaDonID", hoaDonID);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        hoaDon = new HoaDonModel
+                        {
+                            HoaDonID = (int)reader["HoaDonID"],
+                            BanID = (int)reader["BanID"],
+                            NhanVienID = (string)reader["NhanVienID"],
+                            TongTien = (decimal)reader["TongTien"],
+                            TrangThai = (string)reader["TrangThai"],
+                            NgayThanhToan = reader["NgayThanhToan"] != DBNull.Value ? (DateTime?)reader["NgayThanhToan"] : null
+                        };
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lấy hóa đơn theo ID: {ex.Message}");
+            }
+
+            return hoaDon;
         }
 
     }

@@ -17,7 +17,7 @@ namespace QL_CAFE
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
+            Application.Run(new DangNhap());
         }
     }
 }

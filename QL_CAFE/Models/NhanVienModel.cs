@@ -8,28 +8,16 @@ namespace QL_CAFE.Models
 {
     public class NhanVienModel
     {
-        // Mã nhân viên (Primary Key)
-        public string NhanVienID { get; set; }
+        public string NhanVienID { get; set; } // NVARCHAR(100)
 
-        // Họ và tên (Không được để trống)
-        public string HoTen { get; set; }
+        public string HoTen { get; set; } // NVARCHAR(100)
 
-        // Ngày sinh
-        public DateTime NgaySinh { get; set; }
+        public DateTime? NgaySinh { get; set; } // DATE, nullable
 
-        // Số điện thoại
-        public string SoDienThoai { get; set; }
+        public string SoDienThoai { get; set; } // NVARCHAR(15)
 
-        // Địa chỉ
-        public string DiaChi { get; set; }
+        public string DiaChi { get; set; } // NVARCHAR(255)
 
-        // Tên tài khoản (Duy nhất)
-        public string TenTK { get; set; }
-
-        // Mật khẩu (Không được để trống)
-        public string MatKhau { get; set; }
-
-        // Vai trò (Chỉ nhận giá trị 'Admin' hoặc 'User')
-        public string VaiTro { get; set; }
+        public string TenTK { get; set; } // VARCHAR(100), foreign key
     }
 }

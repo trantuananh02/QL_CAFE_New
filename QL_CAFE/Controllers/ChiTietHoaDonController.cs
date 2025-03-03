@@ -302,6 +302,43 @@ VALUES (@HoaDonID, @DoAnUongID, @SoLuong, @Gia)";
         }
 
 
+        // Hàm lấy chi tiết hóa đơn theo HoaDonID
+        public List<ChiTietHoaDonModel> LayChiTietHoaDonByHoaDonID(int hoaDonID)
+        {
+            List<ChiTietHoaDonModel> chiTietHoaDonList = new List<ChiTietHoaDonModel>();
+
+            string query = "SELECT cthd.ChiTietID, cthd.HoaDonID, da.TenDoAnUong, cthd.SoLuong, cthd.Gia " +
+                           "FROM ChiTietHoaDon cthd " +
+                           "JOIN DoAnUong da ON cthd.DoAnUongID = da.DoAnUongID " +
+                           "WHERE cthd.HoaDonID = @HoaDonID";
+
+            SqlCommand cmd = new SqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@HoaDonID", hoaDonID);
+
+            try
+            {
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    ChiTietHoaDonModel chiTiet = new ChiTietHoaDonModel
+                    {
+                        ChiTietID = (int)reader["ChiTietID"],
+                        HoaDonID = (int)reader["HoaDonID"],
+                        TenDoAnUong = (string)reader["TenDoAnUong"],
+                        SoLuong = (int)reader["SoLuong"],
+                        Gia = (decimal)reader["Gia"]
+                    };
+                    chiTietHoaDonList.Add(chiTiet);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi lấy chi tiết hóa đơn: {ex.Message}");
+            }
+
+            return chiTietHoaDonList;
+        }
+
 
     }
 }

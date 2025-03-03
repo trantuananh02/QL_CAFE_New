@@ -38,11 +38,9 @@
             this.pcbLuuThongTinMon = new System.Windows.Forms.PictureBox();
             this.pcbXoaMon = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pcbTimKiem = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox17 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -75,11 +73,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pcbLuuThongTinMon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbXoaMon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbTimKiem)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             this.panel2.SuspendLayout();
@@ -205,20 +201,10 @@
             this.pictureBox5.TabIndex = 5;
             this.pictureBox5.TabStop = false;
             // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = global::QL_CAFE.Properties.Resources.bill;
-            this.pictureBox6.Location = new System.Drawing.Point(147, 3);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 6;
-            this.pictureBox6.TabStop = false;
-            // 
             // pictureBox4
             // 
             this.pictureBox4.Image = global::QL_CAFE.Properties.Resources.reset_png;
-            this.pictureBox4.Location = new System.Drawing.Point(183, 3);
+            this.pictureBox4.Location = new System.Drawing.Point(147, 3);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(30, 30);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -247,20 +233,10 @@
             this.pictureBox3.TabIndex = 9;
             this.pictureBox3.TabStop = false;
             // 
-            // pictureBox16
-            // 
-            this.pictureBox16.Image = global::QL_CAFE.Properties.Resources.bill;
-            this.pictureBox16.Location = new System.Drawing.Point(147, 3);
-            this.pictureBox16.Name = "pictureBox16";
-            this.pictureBox16.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox16.TabIndex = 6;
-            this.pictureBox16.TabStop = false;
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::QL_CAFE.Properties.Resources.reset_png;
-            this.pictureBox2.Location = new System.Drawing.Point(183, 3);
+            this.pictureBox2.Location = new System.Drawing.Point(147, 3);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(30, 30);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -285,7 +261,7 @@
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1921, 86);
+            this.panel2.Size = new System.Drawing.Size(2450, 86);
             this.panel2.TabIndex = 2;
             // 
             // label1
@@ -305,7 +281,7 @@
             this.tblMonTheoDanhMuc.Name = "tblMonTheoDanhMuc";
             this.tblMonTheoDanhMuc.RowHeadersWidth = 51;
             this.tblMonTheoDanhMuc.RowTemplate.Height = 24;
-            this.tblMonTheoDanhMuc.Size = new System.Drawing.Size(998, 792);
+            this.tblMonTheoDanhMuc.Size = new System.Drawing.Size(1098, 792);
             this.tblMonTheoDanhMuc.TabIndex = 4;
             // 
             // panel1
@@ -349,7 +325,6 @@
             this.flowLayoutPanel3.Controls.Add(this.pcbLuuDanhMuc);
             this.flowLayoutPanel3.Controls.Add(this.pcbXoaDanhMuc);
             this.flowLayoutPanel3.Controls.Add(this.pictureBox15);
-            this.flowLayoutPanel3.Controls.Add(this.pictureBox16);
             this.flowLayoutPanel3.Controls.Add(this.pictureBox2);
             this.flowLayoutPanel3.Controls.Add(this.flowLayoutPanel4);
             this.flowLayoutPanel3.Location = new System.Drawing.Point(9, 29);
@@ -463,7 +438,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(914, 89);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1007, 931);
+            this.groupBox1.Size = new System.Drawing.Size(1183, 931);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh sách món ăn";
@@ -483,7 +458,6 @@
             this.flowLayoutPanel1.Controls.Add(this.pcbLuuThongTinMon);
             this.flowLayoutPanel1.Controls.Add(this.pcbXoaMon);
             this.flowLayoutPanel1.Controls.Add(this.pictureBox5);
-            this.flowLayoutPanel1.Controls.Add(this.pictureBox6);
             this.flowLayoutPanel1.Controls.Add(this.pictureBox4);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
             this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
@@ -525,11 +499,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pcbLuuThongTinMon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbXoaMon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbTimKiem)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -567,11 +539,9 @@
         private System.Windows.Forms.PictureBox pcbLuuThongTinMon;
         private System.Windows.Forms.PictureBox pcbXoaMon;
         private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pcbTimKiem;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox16;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox17;
         private System.Windows.Forms.Panel panel2;

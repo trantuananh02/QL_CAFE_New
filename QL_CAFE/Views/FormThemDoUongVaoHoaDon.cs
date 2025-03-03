@@ -91,6 +91,10 @@ namespace QL_CAFE.Views
             }
         }
 
+        private void btnHuy_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 
 }

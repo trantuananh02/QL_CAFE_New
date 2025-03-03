@@ -2,15 +2,11 @@
 {
     partial class DangNhap
     {
-        /// <summary>
-        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+       
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -60,7 +56,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(755, 585);
             this.panel1.TabIndex = 1;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // pictureBox4
             // 
@@ -82,7 +77,6 @@
             this.label1.Size = new System.Drawing.Size(243, 42);
             this.label1.TabIndex = 10;
             this.label1.Text = "ĐĂNG NHẬP";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // pictureBox2
             // 
@@ -93,7 +87,6 @@
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 9;
             this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox3
             // 
@@ -104,7 +97,6 @@
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 8;
             this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox3_Click);
             // 
             // pictureBox1
             // 
@@ -115,7 +107,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // button1
             // 
@@ -138,7 +129,6 @@
             this.txtMatKhau.TabIndex = 3;
             this.txtMatKhau.Text = "Nhập mật khẩu";
             this.txtMatKhau.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtMatKhau_MouseClick);
-            this.txtMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged);
             this.txtMatKhau.Leave += new System.EventHandler(this.txtMatKhau_Leave);
             // 
             // txtTenTaiKhoan
@@ -151,7 +141,6 @@
             this.txtTenTaiKhoan.TabIndex = 2;
             this.txtTenTaiKhoan.Text = "Nhập tên tài khoản";
             this.txtTenTaiKhoan.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtTenTaiKhoan_MouseClick);
-            this.txtTenTaiKhoan.TextChanged += new System.EventHandler(this.txtDangNhap_TextChanged);
             this.txtTenTaiKhoan.Leave += new System.EventHandler(this.txtTenTaiKhoan_Leave);
             // 
             // DangNhap

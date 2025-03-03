@@ -33,72 +33,68 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tblKhuVuc = new System.Windows.Forms.DataGridView();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.pcbThemDongKhuVuc = new System.Windows.Forms.PictureBox();
             this.pcbLuuKhuVuc = new System.Windows.Forms.PictureBox();
             this.pcbXoaKhuVuc = new System.Windows.Forms.PictureBox();
             this.pictureBox15 = new System.Windows.Forms.PictureBox();
-            this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBox17 = new System.Windows.Forms.PictureBox();
             this.pictureBox18 = new System.Windows.Forms.PictureBox();
             this.pictureBox19 = new System.Windows.Forms.PictureBox();
             this.pictureBox20 = new System.Windows.Forms.PictureBox();
             this.pictureBox21 = new System.Windows.Forms.PictureBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboKhuVuc = new System.Windows.Forms.ComboBox();
             this.pcbTimKiem = new System.Windows.Forms.PictureBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.pcbThemDongBan = new System.Windows.Forms.PictureBox();
             this.pcbLuuThongTinBan = new System.Windows.Forms.PictureBox();
             this.pcbXoaBan = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cboKhuVuc = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tblBanTheoKhuVuc)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tblKhuVuc)).BeginInit();
             this.flowLayoutPanel3.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
-            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbThemDongKhuVuc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbLuuKhuVuc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbXoaKhuVuc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.flowLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbTimKiem)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbThemDongBan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbLuuThongTinBan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbXoaBan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,7 +105,7 @@
             this.tblBanTheoKhuVuc.Name = "tblBanTheoKhuVuc";
             this.tblBanTheoKhuVuc.RowHeadersWidth = 51;
             this.tblBanTheoKhuVuc.RowTemplate.Height = 24;
-            this.tblBanTheoKhuVuc.Size = new System.Drawing.Size(998, 792);
+            this.tblBanTheoKhuVuc.Size = new System.Drawing.Size(1100, 792);
             this.tblBanTheoKhuVuc.TabIndex = 4;
             // 
             // panel1
@@ -154,90 +150,12 @@
             this.flowLayoutPanel3.Controls.Add(this.pcbLuuKhuVuc);
             this.flowLayoutPanel3.Controls.Add(this.pcbXoaKhuVuc);
             this.flowLayoutPanel3.Controls.Add(this.pictureBox15);
-            this.flowLayoutPanel3.Controls.Add(this.pictureBox16);
             this.flowLayoutPanel3.Controls.Add(this.pictureBox2);
             this.flowLayoutPanel3.Controls.Add(this.flowLayoutPanel4);
             this.flowLayoutPanel3.Location = new System.Drawing.Point(9, 29);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(1918, 33);
             this.flowLayoutPanel3.TabIndex = 3;
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.flowLayoutPanel4.Controls.Add(this.pictureBox17);
-            this.flowLayoutPanel4.Controls.Add(this.pictureBox18);
-            this.flowLayoutPanel4.Controls.Add(this.pictureBox19);
-            this.flowLayoutPanel4.Controls.Add(this.pictureBox20);
-            this.flowLayoutPanel4.Controls.Add(this.pictureBox21);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 39);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(1918, 33);
-            this.flowLayoutPanel4.TabIndex = 7;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.Color.LightCyan;
-            this.groupBox1.Controls.Add(this.cboKhuVuc);
-            this.groupBox1.Controls.Add(this.pcbTimKiem);
-            this.groupBox1.Controls.Add(this.tblBanTheoKhuVuc);
-            this.groupBox1.Controls.Add(this.flowLayoutPanel1);
-            this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(914, 89);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1007, 931);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Danh sách bàn theo khu vực";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.flowLayoutPanel1.Controls.Add(this.pcbThemDongBan);
-            this.flowLayoutPanel1.Controls.Add(this.pcbLuuThongTinBan);
-            this.flowLayoutPanel1.Controls.Add(this.pcbXoaBan);
-            this.flowLayoutPanel1.Controls.Add(this.pictureBox5);
-            this.flowLayoutPanel1.Controls.Add(this.pictureBox6);
-            this.flowLayoutPanel1.Controls.Add(this.pictureBox4);
-            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
-            this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(9, 29);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1918, 33);
-            this.flowLayoutPanel1.TabIndex = 3;
-            // 
-            // flowLayoutPanel2
-            // 
-            this.flowLayoutPanel2.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.flowLayoutPanel2.Controls.Add(this.pictureBox7);
-            this.flowLayoutPanel2.Controls.Add(this.pictureBox8);
-            this.flowLayoutPanel2.Controls.Add(this.pictureBox9);
-            this.flowLayoutPanel2.Controls.Add(this.pictureBox10);
-            this.flowLayoutPanel2.Controls.Add(this.pictureBox11);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 39);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(1918, 33);
-            this.flowLayoutPanel2.TabIndex = 7;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.LightBlue;
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1921, 86);
-            this.panel2.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(129, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(396, 42);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Quản lý bàn và khu vực";
             // 
             // pcbThemDongKhuVuc
             // 
@@ -282,26 +200,29 @@
             this.pictureBox15.TabIndex = 5;
             this.pictureBox15.TabStop = false;
             // 
-            // pictureBox16
-            // 
-            this.pictureBox16.Image = global::QL_CAFE.Properties.Resources.bill;
-            this.pictureBox16.Location = new System.Drawing.Point(147, 3);
-            this.pictureBox16.Name = "pictureBox16";
-            this.pictureBox16.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox16.TabIndex = 6;
-            this.pictureBox16.TabStop = false;
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::QL_CAFE.Properties.Resources.reset_png;
-            this.pictureBox2.Location = new System.Drawing.Point(183, 3);
+            this.pictureBox2.Location = new System.Drawing.Point(147, 3);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(30, 30);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.flowLayoutPanel4.Controls.Add(this.pictureBox17);
+            this.flowLayoutPanel4.Controls.Add(this.pictureBox18);
+            this.flowLayoutPanel4.Controls.Add(this.pictureBox19);
+            this.flowLayoutPanel4.Controls.Add(this.pictureBox20);
+            this.flowLayoutPanel4.Controls.Add(this.pictureBox21);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 39);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(1918, 33);
+            this.flowLayoutPanel4.TabIndex = 7;
             // 
             // pictureBox17
             // 
@@ -353,6 +274,30 @@
             this.pictureBox21.TabIndex = 6;
             this.pictureBox21.TabStop = false;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.LightCyan;
+            this.groupBox1.Controls.Add(this.cboKhuVuc);
+            this.groupBox1.Controls.Add(this.pcbTimKiem);
+            this.groupBox1.Controls.Add(this.tblBanTheoKhuVuc);
+            this.groupBox1.Controls.Add(this.flowLayoutPanel1);
+            this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(914, 89);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1500, 931);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Danh sách bàn theo khu vực";
+            // 
+            // cboKhuVuc
+            // 
+            this.cboKhuVuc.FormattingEnabled = true;
+            this.cboKhuVuc.Location = new System.Drawing.Point(497, 82);
+            this.cboKhuVuc.Name = "cboKhuVuc";
+            this.cboKhuVuc.Size = new System.Drawing.Size(295, 30);
+            this.cboKhuVuc.TabIndex = 12;
+            this.cboKhuVuc.SelectedIndexChanged += new System.EventHandler(this.cboKhuVuc_SelectedIndexChanged);
+            // 
             // pcbTimKiem
             // 
             this.pcbTimKiem.Image = global::QL_CAFE.Properties.Resources.search;
@@ -363,6 +308,21 @@
             this.pcbTimKiem.TabIndex = 11;
             this.pcbTimKiem.TabStop = false;
             this.pcbTimKiem.Click += new System.EventHandler(this.pictureBox12_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.flowLayoutPanel1.Controls.Add(this.pcbThemDongBan);
+            this.flowLayoutPanel1.Controls.Add(this.pcbLuuThongTinBan);
+            this.flowLayoutPanel1.Controls.Add(this.pcbXoaBan);
+            this.flowLayoutPanel1.Controls.Add(this.pictureBox5);
+            this.flowLayoutPanel1.Controls.Add(this.pictureBox4);
+            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
+            this.flowLayoutPanel1.Controls.Add(this.pictureBox3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(9, 29);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1918, 33);
+            this.flowLayoutPanel1.TabIndex = 3;
             // 
             // pcbThemDongBan
             // 
@@ -407,26 +367,29 @@
             this.pictureBox5.TabIndex = 5;
             this.pictureBox5.TabStop = false;
             // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Image = global::QL_CAFE.Properties.Resources.bill;
-            this.pictureBox6.Location = new System.Drawing.Point(147, 3);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox6.TabIndex = 6;
-            this.pictureBox6.TabStop = false;
-            // 
             // pictureBox4
             // 
             this.pictureBox4.Image = global::QL_CAFE.Properties.Resources.reset_png;
-            this.pictureBox4.Location = new System.Drawing.Point(183, 3);
+            this.pictureBox4.Location = new System.Drawing.Point(147, 3);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(30, 30);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 10;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Click += new System.EventHandler(this.pictureBox4_Click);
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.flowLayoutPanel2.Controls.Add(this.pictureBox7);
+            this.flowLayoutPanel2.Controls.Add(this.pictureBox8);
+            this.flowLayoutPanel2.Controls.Add(this.pictureBox9);
+            this.flowLayoutPanel2.Controls.Add(this.pictureBox10);
+            this.flowLayoutPanel2.Controls.Add(this.pictureBox11);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 39);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(1918, 33);
+            this.flowLayoutPanel2.TabIndex = 7;
             // 
             // pictureBox7
             // 
@@ -488,6 +451,16 @@
             this.pictureBox3.TabIndex = 9;
             this.pictureBox3.TabStop = false;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.LightBlue;
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(2075, 86);
+            this.panel2.TabIndex = 2;
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::QL_CAFE.Properties.Resources.grouping;
@@ -498,14 +471,15 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // cboKhuVuc
+            // label1
             // 
-            this.cboKhuVuc.FormattingEnabled = true;
-            this.cboKhuVuc.Location = new System.Drawing.Point(497, 82);
-            this.cboKhuVuc.Name = "cboKhuVuc";
-            this.cboKhuVuc.Size = new System.Drawing.Size(295, 30);
-            this.cboKhuVuc.TabIndex = 12;
-            this.cboKhuVuc.SelectedIndexChanged += new System.EventHandler(this.cboKhuVuc_SelectedIndexChanged);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(129, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(396, 42);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Quản lý bàn và khu vực";
             // 
             // FormQuanLyBan
             // 
@@ -523,36 +497,34 @@
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tblKhuVuc)).EndInit();
             this.flowLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel2.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbThemDongKhuVuc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbLuuKhuVuc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbXoaKhuVuc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.flowLayoutPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox17)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox18)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox19)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbTimKiem)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbThemDongBan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbLuuThongTinBan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcbXoaBan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            this.flowLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -568,7 +540,6 @@
         private System.Windows.Forms.PictureBox pcbLuuThongTinBan;
         private System.Windows.Forms.PictureBox pcbXoaBan;
         private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
@@ -578,6 +549,10 @@
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox pcbTimKiem;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.ComboBox cboKhuVuc;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView tblKhuVuc;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
@@ -585,17 +560,12 @@
         private System.Windows.Forms.PictureBox pcbLuuKhuVuc;
         private System.Windows.Forms.PictureBox pcbXoaKhuVuc;
         private System.Windows.Forms.PictureBox pictureBox15;
-        private System.Windows.Forms.PictureBox pictureBox16;
+        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.PictureBox pictureBox17;
         private System.Windows.Forms.PictureBox pictureBox18;
         private System.Windows.Forms.PictureBox pictureBox19;
         private System.Windows.Forms.PictureBox pictureBox20;
         private System.Windows.Forms.PictureBox pictureBox21;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pcbTimKiem;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.ComboBox cboKhuVuc;
     }
 }
