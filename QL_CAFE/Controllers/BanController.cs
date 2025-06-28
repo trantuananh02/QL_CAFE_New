@@ -34,9 +34,14 @@ namespace QL_CAFE.Controllers
                                 SoBan = reader.GetString(1),
                                 TrangThai = reader.GetString(2),
                                 KhuVucID = reader.GetInt32(3)
+                                BanID = reader.GetInt32(0),
+                                SoBan = reader.GetString(1),
+                                TrangThai = reader.GetString(2),
+                                KhuVucID = reader.GetInt32(3)
                             };
 
                             danhSachBan.Add(ban);
+                              danhSachBan.Add(ban);
                         }
                     }
                 }

@@ -33,6 +33,10 @@ namespace QL_CAFE.Controllers
                 // Xử lý lỗi kết nối
                 Console.WriteLine("Lỗi kết nối: " + ex.Message);
                 Console.WriteLine(ex.StackTrace); // In chi tiết lỗi để dễ dàng xác định
+                Console.WriteLine("Lỗi kết nối: " + ex.Message);
+                Console.WriteLine(ex.StackTrace); // In chi tiết lỗi để dễ dàng xác định
+                 Console.WriteLine("Lỗi kết nối: " + ex.Message);
+                Console.WriteLine(ex.StackTrace); // In chi tiết lỗi để dễ dàng xác định
             }
         }
 

@@ -29,6 +29,11 @@ namespace QL_CAFE.Controllers
                             {
                                 DoAnUongID = reader.GetInt32(0),
                                 TenDoAnUong = reader.GetString(1),
+                                TenDoAnUong = reader.GetString(1),
+                                TenDoAnUong = reader.GetString(1),
+                                TenDoAnUong = reader.GetString(1),
+                                TenDoAnUong = reader.GetString(1),
+                                
                                 Gia = reader.GetDecimal(2),
                                 DanhMucID = reader.GetInt32(3)
                             };

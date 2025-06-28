@@ -13,6 +13,10 @@ namespace QL_CAFE.Models
         public int DoAnUongID { get; set; } // Khóa chính
         public string TenDoAnUong { get; set; } // Tên đồ ăn uống, không được null
         public decimal Gia { get; set; } // Giá tiền
+        public string TenDoAnUong { get; set; } // Tên đồ ăn uống, không được null
+        public decimal Gia { get; set; } // Giá tiền
+        public string TenDoAnUong { get; set; } // Tên đồ ăn uống, không được null
+        public decimal Gia { get; set; } // Giá tiền
         public string HinhAnh { get; set; } // Hình ảnh có thể null hoặc chuỗi rỗng
         public int DanhMucID { get; set; } // ID danh mục, khóa ngoại
     }
