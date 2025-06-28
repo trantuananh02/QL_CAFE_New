@@ -12,6 +12,10 @@ namespace QL_CAFE.Models
         // Định nghĩa lớp tương ứng với bảng KhuVuc trong cơ sở dữ liệu
         public int KhuVucID { get; set; }
         public string TenKhuVuc { get; set; }
+         public int KhuVucID { get; set; }
+        public string TenKhuVuc { get; set; }
+         public int KhuVucID { get; set; }
+        public string TenKhuVuc { get; set; }
 
     }
 }

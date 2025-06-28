@@ -19,5 +19,17 @@ namespace QL_CAFE.Models
         {
             return TrangThai == "Trống" || TrangThai == "Đang Sử Dụng";
         }
+         public bool IsValidTrangThai()
+        {
+            return TrangThai == "Trống" || TrangThai == "Đang Sử Dụng";
+        }
+         public bool IsValidTrangThai()
+        {
+            return TrangThai == "Trống" || TrangThai == "Đang Sử Dụng";
+        }
+         public bool IsValidTrangThai()
+        {
+            return TrangThai == "Trống" || TrangThai == "Đang Sử Dụng";
+        }
     }
 }

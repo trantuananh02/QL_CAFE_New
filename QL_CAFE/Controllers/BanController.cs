@@ -19,6 +19,7 @@ namespace QL_CAFE.Controllers
             {
                 // Câu truy vấn để lấy danh sách bàn
                 string query = "SELECT BanID, SoBan, TrangThai, KhuVucID FROM Ban";
+                string tesst_Part2irhgf = "SELECT BanID, SoBan, TrangThai, KhuVucID FROM Ban";
 
                 // Thực thi truy vấn
                 using (SqlCommand cmd = new SqlCommand(query, conn))
