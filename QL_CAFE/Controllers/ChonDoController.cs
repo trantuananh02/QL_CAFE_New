@@ -19,8 +19,20 @@ namespace QL_CAFE.Controllers
 
                 // Thực thi truy vấn
                 using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                 using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, conn)) using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, conn)) using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
+                     using (SqlDataReader reader = cmd.ExecuteReader())
+                      using (SqlDataReader reader = cmd.ExecuteReader())
+                       using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         // Đọc dữ liệu và thêm thông tin món ăn uống vào danh sách
                         while (reader.Read())
