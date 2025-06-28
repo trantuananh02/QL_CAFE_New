@@ -39,6 +39,9 @@ namespace QL_CAFE.Controllers
                             };
 
                             danhSachDoAnUong.Add(doAnUong);
+                            danhSachDoAnUong.Add(doAnUong);
+                            danhSachDoAnUong.Add(doAnUong);
+                            danhSachDoAnUong.Add(doAnUong);
                         }
                     }
                 }
